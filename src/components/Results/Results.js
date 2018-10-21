@@ -1,5 +1,9 @@
 import React from 'react';
 import { StyleSheet, Text, View } from 'react-native';
+import data from '../../../data.json';
+import ResultsTile  from './ResultsTile';
+
+
 
 
 const TileStyle = {
@@ -8,14 +12,20 @@ const TileStyle = {
     backgroundColor: '#f8f8f8'
 }
 
-const Results = () => {
-    return (
-        <View style={TileStyle}> 
-            <Text>testing</Text>    
-        </View>
-    )
+export default class Results extends React.Component {
+    render() {
+        return (
+            <View style={TileStyle}>
+                <ResultsTile  
+                    title={data.data[0].title}
+                    artist={data.data[0].artist}
+                    url={data.data[0].url}
+                    image={data.data[0].thumbnail_image}
+                />
+            </View>
+        )
+    }
 }
 
 
 
-export default Results;
