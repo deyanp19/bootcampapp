@@ -1,6 +1,6 @@
 
 { 
-    data:  [{
+    "data":  [{
         "title": "Taylor Swift",
         "artist": "Taylor Swift",
         "url": "https://www.amazon.com/Taylor-Swift/dp/B0014I4KH6",
