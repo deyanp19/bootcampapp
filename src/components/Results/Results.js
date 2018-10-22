@@ -1,31 +1,39 @@
 import React from 'react';
-import { StyleSheet, Text, View } from 'react-native';
+import { StyleSheet, Text, ScrollView } from 'react-native';
 import data from '../../../data.json';
 import ResultsTile  from './ResultsTile';
 
-
-
-
-const TileStyle = {
-    height: '30%',
-    width: '80%',
-    backgroundColor: '#f8f8f8'
-}
-
 export default class Results extends React.Component {
+
+    state= {
+        data: data.data
+    }
+    
+   renderResultTiles() {
+    return this.state.data.map(data => 
+    <ResultsTile  
+        key={data.title}
+        title={data.title}
+        artist={data.artist}
+        url={data.url}
+        /> 
+        );
+    }
+
+    componentWillMount(){
+        console.log('received data: ' , this.state.data)
+    }
+
     render() {
         return (
-            <View style={TileStyle}>
-                <ResultsTile  
-                    title={data.data[0].title}
-                    artist={data.data[0].artist}
-                    url={data.data[0].url}
-                    image={data.data[0].thumbnail_image}
-                />
-            </View>
+            <ScrollView style={TileStyle}>
+                {this.renderResultTiles()}
+            </ScrollView>
         )
     }
 }
 
 
-
+const TileStyle = {
+    height: '100%',
+}
