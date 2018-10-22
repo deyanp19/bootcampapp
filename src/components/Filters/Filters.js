@@ -1,5 +1,5 @@
 import React, { Component } from "react";
-
+import  { View } from "react-native";
 
 export default class Filters extends Component {
     constructor(props) {
@@ -7,5 +7,12 @@ export default class Filters extends Component {
         this.state = {
             filters: filters
         }
+    }
+    render () {
+        return(
+            <View>
+                
+            <View/>
+        );
     }
 }
