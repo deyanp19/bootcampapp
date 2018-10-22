@@ -22,10 +22,14 @@ export default class SearchBar extends Component {
 
 const TextInputStyle = {
     height: 40,
-    borderColor: 'black',
-    borderWidth: 1,
+    // borderColor: 'black',
+    // borderWidth: 1,
     width: "60%",
     marginLeft: 80,
     marginRight: 80,
-    backgroundColor: 'white'
+    backgroundColor: 'white',
+    borderRadius: 5,
+    paddingLeft: 15,
+    marginBottom: 20,
+    marginTop: 10
 }
