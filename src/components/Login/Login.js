@@ -1,12 +1,12 @@
 import React from 'react';
-import { View, Text, Button } from 'react-native';
+import { View, Text } from 'react-native';
 
 const Login = () => {
 
     return (
         <View>
-            {/* <Button>Continue with Github</Button>
-            <Button>Sign Up with Email</Button> */}
+            <Text>Continue with Github</Text>
+            <Text>Sign Up with Email</Text>
 
         </View>
 
