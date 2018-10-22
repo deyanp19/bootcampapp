@@ -14,7 +14,7 @@ export default class App extends React.Component {
         <Header
           headerText={"Bootcamps"}
         />
-        {/* <SearchBar /> */}
+        <SearchBar />
         <Results />
 
       </View>
