@@ -2,7 +2,7 @@ import React from 'react';
 import { StyleSheet, Text, View, Image } from 'react-native';
 import Results from './src/components/Results/Results';
 import SearchBar from "./src/components/SearchBar/SearchBar";
-
+import Filters from "./src/components/Filters/Filters";
 
 
 export default class App extends React.Component {
@@ -10,6 +10,7 @@ export default class App extends React.Component {
     return (
       <View style={styles.container}>
       <SearchBar />
+      <Filters/>
         <Results />
 
       </View>
