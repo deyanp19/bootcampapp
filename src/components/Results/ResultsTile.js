@@ -3,6 +3,10 @@ import { StyleSheet, Text, View, Image , Linking} from 'react-native';
 // import data from '../../../data.json';
 import Button from '../Button/Button';
 import ResultsSection from './ResultsSection';
+import Icon from'react-native-vector-icons/FontAwesome';
+const star = (<Icon name ="star" size={20} color="#FA8D62"/>)
+const comment = (<Icon name ="comment" size={20} color="#FA8D62"/>)
+
 
 const ResultsTile = (props) => {
     return (
@@ -24,10 +28,25 @@ const ResultsTile = (props) => {
             <ResultsSection>
                 <Text style={styles.textStyle}>$15,000</Text>
 
-                <Button 
+                {/* <Button 
                     onPress={() => Linking.openURL(props.url)}>
                     View Bootcamp Page
-                </Button>            
+                </Button>         */}
+                <ResultsSection>
+                    <Button 
+                        onPress={() => Linking.openURL(props.url)}>
+                        View Bootcamp Page
+                    </Button>  
+
+                    <Button>
+                        {comment} 
+                    </Button> 
+
+                    <Button>
+                        {star}
+                    </Button> 
+                </ResultsSection>
+     
             </ResultsSection>  
                 
                                
