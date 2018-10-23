@@ -2,6 +2,7 @@ import React from 'react';
 import { View, Text, Button } from 'react-native';
 import SearchBar from './SearchBar';
 import Icon from'react-native-vector-icons/FontAwesome';
+// import Button from '../Button/Button';
 const glass = (<Icon name ="search" size={20} color="#FA8D62"/>)
 
 const SearchSection = (props) => {
@@ -13,7 +14,11 @@ const SearchSection = (props) => {
         <SearchBar />
         </View>
         <View>
-
+<Button title="ertert"
+  color="#841584"
+  accessibilityLabel="Learn more about this purple button">
+{glass}
+  </Button>
             </View>
             </View>
     )
@@ -31,7 +36,8 @@ const TextInputStyle = {
     borderRadius: 5,
     paddingLeft: 15,
     marginBottom: 20,
-    marginTop: 10
+    // marginTop: 10
+    justifyContent: 'center'
 }
 
 
