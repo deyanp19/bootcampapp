@@ -1,7 +1,7 @@
 import React from 'react';
 import { View, Text, TextInput } from 'react-native';
 import Section from '../Common/Section';
-import Button from '../Button/Button';
+import RegisterButton from './RegisterButton';
 
 const Register = () => {
 
@@ -31,10 +31,20 @@ const Register = () => {
                     Password
                 </TextInput>
 
-                <Button style={styles.buttonStyle}>
+                <RegisterButton>
                     Sign Up
-                </Button>
+                </RegisterButton>
 
+            </Section>
+
+            <Section>
+                <Text style={styles.agreementStyle}>
+                    By signing up, you agree with the Terms of Service and Privacy Policy
+                </Text>
+
+                <RegisterButton>
+                    Already have an account? Click Here!
+                </RegisterButton>
             </Section>
            
 
@@ -49,16 +59,19 @@ const styles = {
     containerStyle:{
         marginTop: '15%'
     },
-    buttonStyle:{
-        backgroundColor: '#000',
-        // color: '#007aff',
-        padding: 10
-    },
     textStyle:{
         fontSize: 20,
         textAlign: 'center',
         fontWeight: '400',
         marginBottom: '5%'
+    },
+    agreementStyle:{
+        fontSize: 12,
+        textAlign: 'center',
+        fontWeight: '400',
+        marginBottom: '5%',
+        marginLeft: '10%',
+        marginRight: '10%'
     },
     inputStyle:{
         backgroundColor: '#fff',
@@ -66,7 +79,8 @@ const styles = {
         marginLeft: 15,
         marginRight: 15,
         marginBottom: 15,
-        borderRadius: 5
+        borderRadius: 5,
+        fontSize: 16
     }
 }
 
