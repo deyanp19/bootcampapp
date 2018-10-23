@@ -1,23 +1,32 @@
 import React from 'react';
-import { StyleSheet, Text, View, Image } from 'react-native';
+import { StyleSheet, Text, View, Image, ScrollView } from 'react-native';
 import Results from './src/components/Results/Results';
 import Register from './src/components/Register/Register';
 // import Login from "./src/components/Login/Login";
-import SearchBar from "./src/components/SearchBar/SearchBar";
+import SearchSection from "./src/components/Search/SearchSection";
+
+import Filters from "./src/components/Filters/Filters";
+
 import Header from "./src/components/Header/Header";
+
 
 
 export default class App extends React.Component {
   render() {
     return (
-      <View style={styles.appStyle}>
-        {/* <Header
-          headerText={"Create An Account"}
-        /> */}
-        {/* <SearchBar /> */}
-        {/* <Results /> */}
+
+      <ScrollView style={styles.appStyle}>
+
+
+        <Header
+          headerText={"Bootcamps"}
+        />
         <Register/>
-      </View>
+
+        <SearchSection />
+        <Results />
+
+      </ScrollView>
     );
   }
 }
