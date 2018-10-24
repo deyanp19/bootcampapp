@@ -23,8 +23,8 @@ export default class App extends React.Component {
         />
         <Register/>
 
-        <SearchSection />
-        <Results />
+        {/* <SearchSection /> */}
+        {/* <Results /> */}
 
       </ScrollView>
     );

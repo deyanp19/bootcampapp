@@ -1,63 +1,85 @@
-import React from 'react';
+import React, { Component } from 'react';
 import { View, Text, TextInput } from 'react-native';
-import Section from '../Common/Section';
+import { Section, Input } from '../Common/';
 import RegisterButton from './RegisterButton';
 
-const Register = () => {
+class Register extends Component {
+    state = {
+        first: "",
+        last: "",
+        email: "",
+        password: "",
+        error: "",
+        loading: false,
+    };
 
-    return(
-        <View style={styles.containerStyle}>
-            <Section>
-                <Text style={styles.textStyle}>
-                    Create An Account
-                </Text>
-                <TextInput 
-                    style={styles.inputStyle}>
-                    First Name
-                </TextInput>
+    render(){ 
+        return(
+            <View style={styles.containerStyle}>
+                <Section>
+                    <Text style={styles.textStyle}> 
+                        Create An Account
+                    </Text>
 
-                <TextInput 
-                    style={styles.inputStyle}>
-                    Last Name
-                </TextInput>
+                    <Input
+                        placeholder="First Name"
+                        value={this.state.first}
+                        onChangeText={first => this.setState({ first })}
 
-                <TextInput 
-                    style={styles.inputStyle}>
-                    Email
-                </TextInput>
+                        >
+                    </Input>
 
-                <TextInput 
-                    style={styles.inputStyle}>
-                    Password
-                </TextInput>
+                    <Input
+                        placeholder="Last Name"
+                        value={this.state.last}
+                        onChangeText={last => this.setState({ last })}
 
-                <RegisterButton>
-                    Sign Up
-                </RegisterButton>
+                        >
+                    </Input>
 
-            </Section>
+                    <Input
+                        placeholder="Email"
+                        value={this.state.email}
+                        onChangeText={email => this.setState({ email })}
+                        >
+                    </Input>
 
-            <Section>
-                <Text style={styles.agreementStyle}>
-                    By signing up, you agree with the Terms of Service and Privacy Policy
-                </Text>
+                    <Input
+                        placeholder="Password"
+                        value={this.state.password}
+                        onChangeText={password => this.setState({ password })}
+                        secureTextEntry
+                        >
+                    </Input>
 
-                <RegisterButton>
-                    Already have an account? Click Here!
-                </RegisterButton>
-            </Section>
-           
+                    <RegisterButton>
+                        Sign Up
+                    </RegisterButton>
 
-        </View>
+                </Section>
+
+                <Section>
+                    <Text style={styles.agreementStyle}>
+                        By signing up, you agree with the Terms of Service and Privacy Policy
+                    </Text>
+
+                    <RegisterButton>
+                        Already have an account? Click Here!
+                    </RegisterButton>
+                </Section>
+            
+
+            </View>
 
 
-    ) 
+        ) 
+    }
 
 }
 
 const styles = {
     containerStyle:{
-        marginTop: '15%'
+        marginTop: '5%'
     },
     textStyle:{
         fontSize: 20,

@@ -34,7 +34,6 @@ const styles = {
         margin: 15,
         borderRadius: 5,
         elevation: 1,
-        fontSize: 14
     },
 }
 
