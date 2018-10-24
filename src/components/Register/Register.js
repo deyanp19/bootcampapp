@@ -1,5 +1,8 @@
 import React, { Component } from 'react';
 import { View, Text, TextInput } from 'react-native';
+import firebase from 'firebase';
+
+
 import { Section, Input } from '../Common/';
 import RegisterButton from './RegisterButton';
 
@@ -11,8 +14,58 @@ class Register extends Component {
         password: "",
         error: "",
         loading: false,
+        loggedIn: null
     };
 
+    componentWillMount(){
+        firebase.initializeApp({
+            apiKey: "AIzaSyARhVJr40Iz-dIAV5aOtaKD6lLi41ZxQAc",
+            authDomain: "authentication-4be06.firebaseapp.com",
+            databaseURL: "https://authentication-4be06.firebaseio.com",
+            projectId: "authentication-4be06",
+            storageBucket: "authentication-4be06.appspot.com",
+            messagingSenderId: "653745336722"
+          });
+
+          firebase.auth().onAuthStateChanged((user) => {
+            if (user) {
+                this.setState({ loggedIn: true });
+            } else {
+                this.setState({ loggedIn: false });
+            }
+
+          });
+    }
+
+
+    onButtonPress(){
+        const { email, password } = this.state
+        this.setState({ error: "", loading: true });
+
+        firebase.auth().createUserWithEmailAndPassword(email, password)
+        .then(this.onCreateAccountSuccess.bind(this))
+        .catch(this.onCreateAccountFail.bind(this));
+    }
+
+    onCreateAccountFail(){
+        this.setState({ error: 'Account Creation Failed', loading:false })                   
+    }
+
+    onCreateAccountSuccess(){
+        this.setState({ 
+            first: "",
+            last: "",
+            email:"", 
+            password:"", 
+            error: "Account Created", 
+            loading: false
+
+            // redirect to login page
+        });
+
+
+
+    }
     render(){ 
         return(
             <View style={styles.containerStyle}>
@@ -52,7 +105,13 @@ class Register extends Component {
                         >
                     </Input>
 
-                    <RegisterButton>
+                    <Text style={styles.errorTextStyle}>
+                        {this.state.error}
+                    </Text>
+
+                    <RegisterButton
+                        onPress={this.onButtonPress.bind(this)}
+                        >
                         Sign Up
                     </RegisterButton>
 
@@ -103,6 +162,11 @@ const styles = {
         marginBottom: 15,
         borderRadius: 5,
         fontSize: 16
+    },
+    errorTextStyle:{
+        fontSize: 20,
+        alignSelf: 'center',
+        color: 'red'
     }
 }
 
