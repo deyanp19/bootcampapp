@@ -7,11 +7,11 @@ const SearchSection = (props) => {
 
     return(
         <View style={{flexDirection: 'row'}}>
-        <View style={TextInputStyle}>
-            {props.children}
-        <SearchBar />
-        </View>
+            <View style={TextInputStyle}>
+                {props.children}
+                <SearchBar />
             </View>
+        </View>
     )
 
 }

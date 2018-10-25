@@ -1,8 +1,10 @@
 import React from 'react';
-import { StyleSheet, Text, View, Image } from 'react-native';
+import { StyleSheet, Text, View, Image, ScrollView } from 'react-native';
 import Results from './src/components/Results/Results';
 // import Register from './src/components/Register/Register';
-// import Login from "./src/components/Login/Login";
+
+
+import Login from './src/components/Login/Login';
 import SearchSection from "./src/components/Search/SearchSection";
 
 import Filters from "./src/components/Filters/Filters";
@@ -17,11 +19,13 @@ export default class App extends React.Component {
 
       <View style={styles.appStyle}>
 
-
         <Header
           headerText={"Bootcamps"}
         />
-        <SearchSection />
+        {/* <Register/> */}
+        {/* <Login/> */}
+
+        {/* <SearchSection /> */}
         <Results />
 
       </View>
