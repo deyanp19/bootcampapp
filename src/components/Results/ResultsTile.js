@@ -38,9 +38,9 @@ const ResultsTile = (props) => {
                         View Bootcamp Page
                     </Button>  
 
-                    <Button>
+                    {/* <Button>
                         {comment} 
-                    </Button> 
+                    </Button>  */}
 
                     <Button>
                         {star}
