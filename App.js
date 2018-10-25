@@ -17,19 +17,18 @@ export default class App extends React.Component {
   render() {
     return (
 
-      <ScrollView style={styles.appStyle}>
-
+      <View style={styles.appStyle}>
 
         <Header
           headerText={"Bootcamps"}
         />
         {/* <Register/> */}
-        <Login/>
+        {/* <Login/> */}
 
         {/* <SearchSection /> */}
-        {/* <Results /> */}
+        <Results />
 
-      </ScrollView>
+      </View>
     );
   }
 }

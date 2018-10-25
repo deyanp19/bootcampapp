@@ -12,18 +12,18 @@ const ResultsTile = (props) => {
     return (
         <View style={styles.resultsTileStyle}>
             <ResultsSection>
-                <Text style={styles.textStyle}>{props.title}</Text>
-                <Text style={styles.textStyle}>{props.title}</Text>
+                <Text style={styles.textStyle}>{props.name}</Text>
+                <Text style={styles.textStyle}>{props.location}</Text>
 
             </ResultsSection>
 
             <ResultsSection>
-                <Text style={styles.textStyle}>{props.artist}</Text>
+                <Text style={styles.textStyle}>{props.topics}</Text>
             </ResultsSection>
 
-            <ResultsSection>
+            {/* <ResultsSection>
                 <Text style={styles.textStyle}>{props.url}</Text>
-            </ResultsSection>
+            </ResultsSection> */}
 
             <ResultsSection>
                 <Text style={styles.textStyle}>$15,000</Text>

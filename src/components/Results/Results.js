@@ -12,17 +12,17 @@ export default class Results extends React.Component {
    renderResultTiles() {
     return this.state.data.map(data => 
     <ResultsTile  
-        key={data.title}
-        title={data.title}
-        artist={data.artist}
-        url={data.url}
+        key={data.name}
+        name={data.name}
+        location={data.location}
+        topics={data.topics}
         /> 
         );
     }
 
-    componentWillMount(){
-        console.log('received data: ' , this.state.data)
-    }
+    // componentWillMount(){
+    //     console.log('received data: ' , this.state.data)
+    // }
 
     render() {
         return (
