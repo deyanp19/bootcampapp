@@ -17,7 +17,7 @@ export default class Results extends React.Component {
         key={data.name}
         name={data.name}
         location={(data.location).split(';')[0]}
-        topics={data.topics}
+        topics={(data.topics).split(',')[0]}
         /> 
         );
     }
