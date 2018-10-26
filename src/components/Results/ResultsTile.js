@@ -1,14 +1,23 @@
-import React from 'react';
-import { StyleSheet, Text, View, Image , Linking} from 'react-native';
+import React, { Component } from 'react';
+import { StyleSheet, Text, View, Image , Linking, LayoutAnimation, Platform, UIManager, TouchableOpacity} from 'react-native';
 // import data from '../../../data.json';
 import Button from '../Button/Button';
 import ResultsSection from './ResultsSection';
 import Icon from'react-native-vector-icons/FontAwesome';
 const star = (<Icon name ="star" size={20} color="#FA8D62"/>)
 const comment = (<Icon name ="comment" size={20} color="#FA8D62"/>)
+const browser = (<Icon name="file" size={20}/>)
 
 
-const ResultsTile = (props) => {
+export default class ResultsTile extends Component {
+            constructor(props) {
+                super(props);
+
+            }
+    
+    render() {
+
+    
     return (
         <View style={styles.resultsTileStyle}>
             <ResultsSection>
@@ -42,6 +51,9 @@ const ResultsTile = (props) => {
                         {comment} 
                     </Button>  */}
 
+<Button>
+                        {browser}
+                    </Button> 
                     <Button>
                         {star}
                     </Button> 
@@ -53,7 +65,7 @@ const ResultsTile = (props) => {
        </View>
     )
 }
-
+}
 
 const styles = {
     resultsTileStyle:{
