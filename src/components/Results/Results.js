@@ -5,17 +5,19 @@ import ResultsTile  from './ResultsTile';
 
 export default class Results extends React.Component {
 
-    state= {
-        data: data.data
+    state = {
+        data: data.data,
     }
     
    renderResultTiles() {
+
     return this.state.data.map(data => 
+        
     <ResultsTile  
         key={data.name}
         name={data.name}
-        location={data.location}
-        topics={data.topics}
+        location={(data.location).split(';')[0]}
+        topics={(data.topics).split(',')[0]}
         /> 
         );
     }
