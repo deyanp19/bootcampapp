@@ -6,29 +6,24 @@ import SearchBar from './SearchBar';
 const SearchSection = (props) => {
 
     return(
-        <View style={{flexDirection: 'row'}}>
-            <View style={TextInputStyle}>
+        <View >
                 {props.children}
                 <SearchBar />
-            </View>
         </View>
     )
 
 }
-const TextInputStyle = {
+const styles = {
+    searchSectionStyle:{
+        height: 40,
+        width: "100%",
+        backgroundColor: 'white',
+        borderRadius: 5,
+        paddingLeft: 15,
+        marginBottom: 20,
+        justifyContent: 'center'
+    }
     
-    height: 40,
-    // borderColor: 'black',
-    // borderWidth: 1,
-    width: "100%",
-    // marginLeft: 15,
-    // marginRight: 15,
-    backgroundColor: 'white',
-    // borderRadius: 5,
-    paddingLeft: 15,
-    marginBottom: 20,
-    // marginTop: 10
-    justifyContent: 'center'
 }
 
 
