@@ -22,9 +22,9 @@ export default class Results extends React.Component {
         );
     }
 
-    // componentWillMount(){
-    //     console.log('received data: ' , this.state.data)
-    // }
+    componentWillMount(){
+        console.log('received data: ' , this.state.data)
+    }
 
     render() {
         return (

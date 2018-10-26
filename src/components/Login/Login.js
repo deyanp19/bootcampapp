@@ -100,7 +100,7 @@ class Login extends Component {
 
                 <Section>
                     <Text style={styles.agreementStyle}>
-                        Forgot your username or password?
+                        Forgot your username or password? 
                     </Text>
 
                     <RegisterButton>

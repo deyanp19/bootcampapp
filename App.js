@@ -3,10 +3,10 @@ import { StyleSheet, Text, View, Image, ScrollView } from 'react-native';
 import Results from './src/components/Results/Results';
 // import Register from './src/components/Register/Register';
 
-
+import Landing from './src//components/Landing/Landing';
 import Login from './src/components/Login/Login';
 import SearchSection from "./src/components/Search/SearchSection";
-
+import Footer from './src/components/Footer/Footer';
 import Filters from "./src/components/Filters/Filters";
 
 import Header from "./src/components/Header/Header";
@@ -26,8 +26,10 @@ export default class App extends React.Component {
         {/* <Login/> */}
 
         {/* <SearchSection /> */}
-        <Results />
-
+        <Landing/>
+        {/* <Results /> */}
+        
+        <Footer/>
       </View>
     );
   }
