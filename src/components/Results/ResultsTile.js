@@ -33,10 +33,10 @@ const ResultsTile = (props) => {
                     View Bootcamp Page
                 </Button>         */}
                 <ResultsSection>
-                    <Button 
+                    {/* <Button 
                         onPress={() => Linking.openURL(props.url)}>
                         View Bootcamp Page
-                    </Button>  
+                    </Button>   */}
 
                     {/* <Button>
                         {comment} 
