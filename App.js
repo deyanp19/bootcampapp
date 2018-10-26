@@ -6,7 +6,7 @@ import Results from './src/components/Results/Results';
 import Landing from './src//components/Landing/Landing';
 import Login from './src/components/Login/Login';
 import SearchSection from "./src/components/Search/SearchSection";
-
+import Footer from './src/components/Footer/Footer';
 import Filters from "./src/components/Filters/Filters";
 
 import Header from "./src/components/Header/Header";
@@ -28,7 +28,8 @@ export default class App extends React.Component {
         {/* <SearchSection /> */}
         <Landing/>
         {/* <Results /> */}
-
+        
+        <Footer/>
       </View>
     );
   }
