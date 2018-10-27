@@ -18,13 +18,20 @@ export default class ResultCommentBox extends Component {
                     onChange={(text) => this.setState({ text })}
                     value={this.state.text}
                     placeholder='Leave a comment'
-                    style={ ResultCommentBoxStyle } />
+                    style={ ResultCommentBoxStyle }
+                    multiline = {true}
+                    numberOfLines = {4}
+                     />
             </View>
         );
     }
 }
 
 const ResultCommentBoxStyle = {
-        borderColor: 'black',
+    backgroundColor: '#F1F3F4',
+        borderColor: '#F1F3F4',
     borderWidth: 1,
+    borderRadius: 5,
+    height: 150
+    
 }

@@ -9,9 +9,6 @@ const star = (<Icon name="star" size={20} color="#FA8D62" />)
 const comment = (<Icon name="comment" size={20} color="#FA8D62" />)
 const browser = (<Icon name="file" size={20} />)
 
-const star = (<Icon name="star" size={20} color="#FA8D62" />)
-const comment = (<Icon name="comment" size={20} color="#FA8D62" />)
-const browser = (<Icon name="file" size={20} />)
 
 
 export default class ResultsTile extends Component {
@@ -96,7 +93,7 @@ export default class ResultsTile extends Component {
             </TouchableOpacity>
 
                                 <View style = {{ height: this.state.modifiedHeight, overflow: 'hidden' }}>
-                        <Text style = { styles.text } onLayout = {( event ) => this.getViewHeight( event.nativeEvent.layout.height )}>
+                        {/* <Text style = { styles.text } onLayout = {( event ) => this.getViewHeight( event.nativeEvent.layout.height )}>
                             Lorem Ipsum is simply dummy text of the printing and typesetting industry.
                             Lorem Ipsum has been the industry's standard dummy text ever since the 1500s,
                             when an unknown printer took a galley of type and scrambled it to make a type specimen book.
@@ -104,7 +101,7 @@ export default class ResultsTile extends Component {
                             remaining essentially unchanged. It was popularised in the 1960s with the release of Letraset sheets 
                             containing Lorem Ipsum passages, and more recently with desktop publishing software 
                             like Aldus PageMaker including versions of Lorem Ipsum.
-                        </Text>
+                        </Text> */}
                         <ResultsCommentBox/>
                         </View>
             </View>
