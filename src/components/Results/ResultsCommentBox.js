@@ -17,9 +17,14 @@ export default class ResultCommentBox extends Component {
                 <TextInput
                     onChange={(text) => this.setState({ text })}
                     value={this.state.text}
-                    placeholder='Leave a comment' />
-
+                    placeholder='Leave a comment'
+                    style={ ResultCommentBoxStyle } />
             </View>
         );
     }
+}
+
+const ResultCommentBoxStyle = {
+        borderColor: 'black',
+    borderWidth: 1,
 }

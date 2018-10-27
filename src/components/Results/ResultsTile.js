@@ -33,7 +33,7 @@ export default class ResultsTile extends Component {
         LayoutAnimation.configureNext( LayoutAnimation.Presets.easeInEaseOut );
  
         if( this.state.expanded === false )
-            this.setState({ modifiedHeight: 100, expanded: true });
+            this.setState({ modifiedHeight: 250, expanded: true });
         else
             this.setState({ modifiedHeight: 0, expanded: false });
     }
