@@ -5,6 +5,9 @@ import Button from '../Button/Button';
 import ResultsSection from './ResultsSection';
 import Icon from 'react-native-vector-icons/FontAwesome';
 import ResultsCommentBox from './ResultsCommentBox';
+const star = (<Icon name="star" size={20} color="#FA8D62" />)
+const comment = (<Icon name="comment" size={20} color="#FA8D62" />)
+const browser = (<Icon name="file" size={20} />)
 
 const star = (<Icon name="star" size={20} color="#FA8D62" />)
 const comment = (<Icon name="comment" size={20} color="#FA8D62" />)
