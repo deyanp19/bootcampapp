@@ -4,6 +4,8 @@ import { StyleSheet, Text, View, Image, Linking, LayoutAnimation, Platform, UIMa
 import Button from '../Button/Button';
 import ResultsSection from './ResultsSection';
 import Icon from 'react-native-vector-icons/FontAwesome';
+import ResultsCommentBox from './ResultsCommentBox';
+
 const star = (<Icon name="star" size={20} color="#FA8D62" />)
 const comment = (<Icon name="comment" size={20} color="#FA8D62" />)
 const browser = (<Icon name="file" size={20} />)
@@ -100,6 +102,7 @@ export default class ResultsTile extends Component {
                             containing Lorem Ipsum passages, and more recently with desktop publishing software 
                             like Aldus PageMaker including versions of Lorem Ipsum.
                         </Text>
+                        <ResultsCommentBox/>
                         </View>
             </View>
         )
