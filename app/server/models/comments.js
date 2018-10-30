@@ -8,6 +8,9 @@ module.exports = (sequelize, DataTypes) => {
   }, {});
   comments.associate = function(models) {
     // associations can be defined here
+    comments.belongsTo(models.bootcamp,{
+      foreignKey: 'id',
+    })
   };
   return comments;
 };

@@ -10,7 +10,10 @@ module.exports = (sequelize, DataTypes) => {
     name: DataTypes.STRING,
   }, {});
   Bootcamp.associate = function(models) {
-    // associations can be defined here
+    Bootcamp.hasMany(models.comments, {
+      foreignKey: 'bootcamp_id',
+      as: 'bootcampReviews'
+    })
   };
   return Bootcamp;
 };
