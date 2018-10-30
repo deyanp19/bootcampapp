@@ -26,8 +26,8 @@ export default class App extends React.Component {
         {/* <Login/> */}
 
         {/* <SearchSection /> */}
-        <Landing/>
-        {/* <Results /> */}
+        {/* <Landing/> */}
+        <Results />
         
         <Footer/>
       </View>

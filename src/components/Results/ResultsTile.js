@@ -1,12 +1,14 @@
 import React, { Component } from 'react';
-import { StyleSheet, Text, View, Image, Linking, LayoutAnimation, Platform, UIManager, TouchableOpacity } from 'react-native';
+import { StyleSheet, Text, View, Image, Linking, LayoutAnimation, Platform, UIManager, TouchableOpacity, ScrollView } from 'react-native';
 // import data from '../../../data.json';
 import Button from '../Button/Button';
 import ResultsSection from './ResultsSection';
 import Icon from 'react-native-vector-icons/FontAwesome';
+import ResultsCommentBox from './ResultsCommentBox';
 const star = (<Icon name="star" size={20} color="#FA8D62" />)
 const comment = (<Icon name="comment" size={20} color="#FA8D62" />)
 const browser = (<Icon name="file" size={20} />)
+
 
 
 export default class ResultsTile extends Component {
@@ -31,7 +33,7 @@ export default class ResultsTile extends Component {
         LayoutAnimation.configureNext( LayoutAnimation.Presets.easeInEaseOut );
  
         if( this.state.expanded === false )
-            this.setState({ modifiedHeight: 100, expanded: true });
+            this.setState({ modifiedHeight: 250, expanded: true });
         else
             this.setState({ modifiedHeight: 0, expanded: false });
     }
@@ -90,7 +92,7 @@ export default class ResultsTile extends Component {
 
             </TouchableOpacity>
 
-                                <View style = {{ height: this.state.modifiedHeight, overflow: 'hidden' }}>
+                                <ScrollView style = {{ height: this.state.modifiedHeight, overflow: 'hidden', marginTop: 5 }}>
                         <Text style = { styles.text } onLayout = {( event ) => this.getViewHeight( event.nativeEvent.layout.height )}>
                             Lorem Ipsum is simply dummy text of the printing and typesetting industry.
                             Lorem Ipsum has been the industry's standard dummy text ever since the 1500s,
@@ -100,7 +102,8 @@ export default class ResultsTile extends Component {
                             containing Lorem Ipsum passages, and more recently with desktop publishing software 
                             like Aldus PageMaker including versions of Lorem Ipsum.
                         </Text>
-                        </View>
+                        <ResultsCommentBox style={{marginTop: 5}}/>
+                        </ScrollView>
             </View>
         )
     }
