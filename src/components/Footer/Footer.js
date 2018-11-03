@@ -1,11 +1,13 @@
 import React from 'react';
 import { Text, View, TouchableOpacity } from 'react-native'
 import Icon from 'react-native-vector-icons/FontAwesome';
+import { Actions } from 'react-native-router-flux';
 
-const search = (<Icon name="search" size={25} color="#FA8D62" />);
-const profile = (<Icon name="user-circle" size={25} color="#FA8D62" />);
-const message = (<Icon name="envelope" size={25} color="#FA8D62" />);
-const more = (<Icon name="bookmark" size={25} color="#FA8D62" />);
+
+const search = (<Icon name="search" size={25} color="#ffffff" />);
+const profile = (<Icon name="user-circle" size={25} color="#ffffff" />);
+const message = (<Icon name="envelope" size={25} color="#ffffff" />);
+const more = (<Icon name="bookmark" size={25} color="#ffffff" />);
 
 
 
@@ -14,14 +16,17 @@ const Footer = (props) => {
     
     return (
         <View style={viewStyle}>
-            <TouchableOpacity>
+            <TouchableOpacity
+                onPress={() => Actions.landing()}
+                >
                 <View style={styles.iconStyle}>
                     {search}
                 </View>
                 <Text style={styles.textStyle}>Search</Text>
             </TouchableOpacity>
 
-            <TouchableOpacity>
+            <TouchableOpacity
+                onPress={() => Actions.login()}>
                 <View style={styles.iconStyle}>
                     {profile}
                 </View>
@@ -35,7 +40,9 @@ const Footer = (props) => {
                 <Text style={styles.textStyle}>Messages</Text>
             </TouchableOpacity>
 
-            <TouchableOpacity>
+            <TouchableOpacity
+                onPress = {() => Actions.register()}
+                >
                 <View style={styles.iconStyle}>
                     {more}
                 </View>
@@ -50,7 +57,7 @@ const Footer = (props) => {
 
 const styles = {
     viewStyle:{
-        backgroundColor: '#ffffff',
+        backgroundColor: '#fA8D62',
         justifyContent: 'space-evenly',
         alignItems: 'center',
         position: 'absolute',
@@ -66,7 +73,7 @@ const styles = {
     },
     textStyle: {
         fontSize: 12,
-        color: '#000',
+        color: '#ffffff',
         alignSelf: 'center'
     }
 

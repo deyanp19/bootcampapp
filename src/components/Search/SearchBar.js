@@ -1,7 +1,8 @@
 import React, { Component } from "react";
-import { AppRegistry, TextInput, View, TouchableOpacity } from 'react-native';
+import { TextInput, View, TouchableOpacity } from 'react-native';
 import Icon from 'react-native-vector-icons/FontAwesome';
-// import Button from '../Button/Button';
+import { Actions } from 'react-native-router-flux';
+ 
 const glass = (<Icon name="search" size={25} color="#FA8D62" />)
 
 export default class SearchBar extends Component {
@@ -14,7 +15,9 @@ export default class SearchBar extends Component {
 
         return (
             <View style = {styles.searchSectionStyle}>
-                <TouchableOpacity style={styles.iconStyle}>
+                <TouchableOpacity 
+                    style={styles.iconStyle}
+                    onPress={() => Actions.results()}>
                     {glass}
                 </TouchableOpacity>
 

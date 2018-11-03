@@ -2,9 +2,9 @@ import React, { Component } from 'react';
 import { View, Text, TextInput } from 'react-native';
 import firebase from 'firebase';
 
-
 import { Section, Input } from '../Common/';
 import RegisterButton from './RegisterButton';
+import { Actions } from 'react-native-router-flux';
 
 class Register extends Component {
     state = {
@@ -18,14 +18,17 @@ class Register extends Component {
     };
 
     componentWillMount(){
-        firebase.initializeApp({
-            apiKey: "AIzaSyARhVJr40Iz-dIAV5aOtaKD6lLi41ZxQAc",
-            authDomain: "authentication-4be06.firebaseapp.com",
-            databaseURL: "https://authentication-4be06.firebaseio.com",
-            projectId: "authentication-4be06",
-            storageBucket: "authentication-4be06.appspot.com",
-            messagingSenderId: "653745336722"
-          });
+        if(!firebase.apps.length){
+            firebase.initializeApp({
+                apiKey: "AIzaSyARhVJr40Iz-dIAV5aOtaKD6lLi41ZxQAc",
+                authDomain: "authentication-4be06.firebaseapp.com",
+                databaseURL: "https://authentication-4be06.firebaseio.com",
+                projectId: "authentication-4be06",
+                storageBucket: "authentication-4be06.appspot.com",
+                messagingSenderId: "653745336722"
+              });
+        }
+        
 
           firebase.auth().onAuthStateChanged((user) => {
             if (user) {
@@ -74,36 +77,42 @@ class Register extends Component {
                         Create An Account
                     </Text>
 
-                    <Input
+                    <TextInput
                         placeholder="First Name"
                         value={this.state.first}
                         onChangeText={first => this.setState({ first })}
+                        style={styles.inputStyle}
 
                         >
-                    </Input>
+                    </TextInput>
 
-                    <Input
+                    <TextInput
                         placeholder="Last Name"
                         value={this.state.last}
                         onChangeText={last => this.setState({ last })}
+                        style={styles.inputStyle}
 
                         >
-                    </Input>
+                    </TextInput>
 
-                    <Input
+                    <TextInput
                         placeholder="Email"
                         value={this.state.email}
                         onChangeText={email => this.setState({ email })}
-                        >
-                    </Input>
+                        style={styles.inputStyle}
 
-                    <Input
+                        >
+                    </TextInput>
+
+                    <TextInput
                         placeholder="Password"
                         value={this.state.password}
                         onChangeText={password => this.setState({ password })}
                         secureTextEntry
+                        style={styles.inputStyle}
+
                         >
-                    </Input>
+                    </TextInput>
 
                     <Text style={styles.errorTextStyle}>
                         {this.state.error}
@@ -122,7 +131,9 @@ class Register extends Component {
                         By signing up, you agree with the Terms of Service and Privacy Policy
                     </Text>
 
-                    <RegisterButton>
+                    <RegisterButton
+                        onPress={() => Actions.login()}
+                        >
                         Already have an account? Click Here!
                     </RegisterButton>
                 </Section>
@@ -156,12 +167,12 @@ const styles = {
     },
     inputStyle:{
         backgroundColor: '#fff',
-        padding: 15,
+        padding: 10,
         marginLeft: 15,
         marginRight: 15,
         marginBottom: 15,
         borderRadius: 5,
-        fontSize: 16
+        fontSize: 18
     },
     errorTextStyle:{
         fontSize: 20,

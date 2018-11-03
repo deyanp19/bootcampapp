@@ -1,39 +1,66 @@
-import React from 'react';
+import React, { Component } from 'react';
 import { StyleSheet, Text, View, Image, ScrollView } from 'react-native';
-import Results from './src/components/Results/Results';
-// import Register from './src/components/Register/Register';
 
-import Landing from './src//components/Landing/Landing';
+import firebase from 'firebase';
+import { Provider } from 'react-redux';
+import { createStore, applyMiddleware } from 'redux';
+
+import Register from './src/components/Register/Register';
+import Landing from './src/components/Landing/Landing';
+import Results from './src/components/Results/Results'
 import Login from './src/components/Login/Login';
-import SearchSection from "./src/components/Search/SearchSection";
-import Footer from './src/components/Footer/Footer';
-import Filters from "./src/components/Filters/Filters";
 
-import Header from "./src/components/Header/Header";
+import { Router, Scene } from 'react-native-router-flux';
 
 
+class App extends Component {
 
-export default class App extends React.Component {
   render() {
+
     return (
+      <Router
+        sceneStyle={styles.appStyle}
+      >  
+        <Scene 
+          key="root"
+          >
+          <Scene
+            key='landing'
+            component={Landing}
+            title="landing"
+            hideNavBar
+            initial
+          >
+          </Scene>
 
-      <View style={styles.appStyle}>
-
-        <Header
-          headerText={"Bootcamps"}
-        />
-        {/* <Register/> */}
-        {/* <Login/> */}
-
-        {/* <SearchSection /> */}
-        {/* <Landing/> */}
-        <Results />
+          <Scene
+            key='results'
+            component={Results}
+            hideNavBar
+            title="results"
+          />
         
-        <Footer/>
-      </View>
+        < Scene
+            key='login'
+            component={Login}
+            hideNavBar
+            title="login"
+          />
+
+        < Scene
+            key='register'
+            component={Register}
+            hideNavBar
+            title="register"
+          />
+
+        </Scene>
+      </Router>
+  
     );
   }
 }
+
 
 const styles = {
   appStyle:{
@@ -43,3 +70,6 @@ const styles = {
 
   }
 }
+
+export default App;
+

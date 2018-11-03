@@ -1,8 +1,12 @@
 import React, { Component } from 'react';
 import { View, Text, TextInput } from 'react-native';
 import firebase from 'firebase';
+import { Actions } from 'react-native-router-flux';
 
-import { Section, Input } from '../Common/';
+import Header from '../Header/Header';
+import Footer from '../Footer/Footer';
+
+import { Section } from '../Common/';
 import RegisterButton from './RegisterButton';
 
 class Login extends Component {
@@ -15,14 +19,18 @@ class Login extends Component {
     };
 
     componentWillMount(){
-        firebase.initializeApp({
-            apiKey: "AIzaSyARhVJr40Iz-dIAV5aOtaKD6lLi41ZxQAc",
-            authDomain: "authentication-4be06.firebaseapp.com",
-            databaseURL: "https://authentication-4be06.firebaseio.com",
-            projectId: "authentication-4be06",
-            storageBucket: "authentication-4be06.appspot.com",
-            messagingSenderId: "653745336722"
-          });
+        // checks if firebase is already running 
+        if(!firebase.apps.length) {
+            firebase.initializeApp({
+                apiKey: "AIzaSyARhVJr40Iz-dIAV5aOtaKD6lLi41ZxQAc",
+                authDomain: "authentication-4be06.firebaseapp.com",
+                databaseURL: "https://authentication-4be06.firebaseio.com",
+                projectId: "authentication-4be06",
+                storageBucket: "authentication-4be06.appspot.com",
+                messagingSenderId: "653745336722"
+              });
+        }
+
 
           firebase.auth().onAuthStateChanged((user) => {
             if (user) {
@@ -45,7 +53,7 @@ class Login extends Component {
     }
 
     onCreateAccountFail(){
-        this.setState({ error: 'Account Creation Failed', loading:false })                   
+        this.setState({ error: 'Login Failed', loading:false })                   
     }
 
     onCreateAccountSuccess(){
@@ -65,50 +73,62 @@ class Login extends Component {
     }
     render(){ 
         return(
-            <View style={styles.containerStyle}>
-                <Section>
-                    <Text style={styles.textStyle}> 
-                        Sign In With Email
-                    </Text>
+            <View style ={{height: '100%'}}>
+                <Header headerText='Bootcamps'/>
 
-                    <Input
-                        placeholder="Email"
-                        value={this.state.email}
-                        onChangeText={email => this.setState({ email })}
-                        >
-                    </Input>
+                <View style={styles.containerStyle}>
+                    <Section>
+                        <Text style={styles.textStyle}>  
+                            Sign In With Email
+                        </Text>
 
-                    <Input
-                        placeholder="Password"
-                        value={this.state.password}
-                        onChangeText={password => this.setState({ password })}
-                        secureTextEntry
-                        >
-                    </Input>
+                        <TextInput
+                            placeholder="Email"
+                            value={this.state.email}
+                            onChangeText={email => this.setState({ email })}
+                            style={styles.inputStyle}
+                            underlineColorAndroid='transparent'
+                            >
+                        </TextInput>
 
-                    <Text style={styles.errorTextStyle}>
-                        {this.state.error}
-                    </Text>
+                        <TextInput
+                            placeholder="Password"
+                            value={this.state.password}
+                            onChangeText={password => this.setState({ password })}
+                            secureTextEntry
+                            style={styles.inputStyle}
+                            underlineColorAndroid='transparent'
+                            >
+                        </TextInput>
 
-                    <RegisterButton
-                        onPress={this.onButtonPress.bind(this)}
-                        >
-                        Log In
-                    </RegisterButton>
+                        <Text style={styles.errorTextStyle}>
+                            {this.state.error}
+                        </Text>
 
-                </Section>
+                        <RegisterButton
+                            onPress={this.onButtonPress.bind(this)}
+                            >
+                            Log In
+                        </RegisterButton>
 
-                <Section>
-                    <Text style={styles.agreementStyle}>
-                        Forgot your username or password? 
-                    </Text>
+                    </Section>
 
-                    <RegisterButton>
-                        Don't have an account? Click Here!
-                    </RegisterButton>
-                </Section>
-            
+                    <Section>
+                        <Text style={styles.agreementStyle}>
+                            Forgot your username or password? 
+                        </Text>
 
+                        <RegisterButton
+                            onPress={() => Actions.register()}
+                            >
+                            Don't have an account? Click Here!
+                        </RegisterButton>
+                    </Section>
+                
+
+                </View>
+                
+                <Footer/>
             </View>
 
 
@@ -119,7 +139,7 @@ class Login extends Component {
 
 const styles = {
     containerStyle:{
-        marginTop: '5%'
+        marginTop: '5%',
     },
     textStyle:{
         fontSize: 20,
@@ -137,12 +157,12 @@ const styles = {
     },
     inputStyle:{
         backgroundColor: '#fff',
-        padding: 15,
+        padding: 10,
         marginLeft: 15,
         marginRight: 15,
         marginBottom: 15,
         borderRadius: 5,
-        fontSize: 16
+        fontSize: 18,
     },
     errorTextStyle:{
         fontSize: 20,
