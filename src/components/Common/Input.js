@@ -29,8 +29,9 @@ const styles = {
         paddingRight: 5,
         lineHeight: 23,
         fontSize: 18,
-        paddingBottom: 7,
-        flex: 2
+        paddingBottom: 70,
+        flex: 1,
+        minHeight: 60,
     },
     containerStyle:{
         backgroundColor: '#fff',
@@ -43,7 +44,8 @@ const styles = {
         marginBottom: 15,
         borderRadius: 5,
         flexDirection: 'row',
-        alignItems: 'center'
+        alignItems: 'center',
+        height: 500
     }
 }
 export { Input };
