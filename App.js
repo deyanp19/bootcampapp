@@ -15,6 +15,19 @@ import { Router, Scene } from 'react-native-router-flux';
 
 
 class App extends Component {
+  componentWillMount(){
+    // checks if firebase is already running 
+    if(!firebase.apps.length) {
+        firebase.initializeApp({
+            apiKey: "AIzaSyARhVJr40Iz-dIAV5aOtaKD6lLi41ZxQAc",
+            authDomain: "authentication-4be06.firebaseapp.com",
+            databaseURL: "https://authentication-4be06.firebaseio.com",
+            projectId: "authentication-4be06",
+            storageBucket: "authentication-4be06.appspot.com",
+            messagingSenderId: "653745336722"
+          });
+    }
+}
 
   render() {
 
