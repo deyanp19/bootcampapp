@@ -1,6 +1,9 @@
 import React from 'react';
-import { StyleSheet, Text, ScrollView } from 'react-native';
+import { View, Text, ScrollView } from 'react-native';
 import data from '../../../data.json';
+
+import Header from '../Header/Header';
+import Footer from '../Footer/Footer';
 import ResultsTile  from './ResultsTile';
 
 export default class Results extends React.Component {
@@ -28,9 +31,14 @@ export default class Results extends React.Component {
 
     render() {
         return (
-            <ScrollView style={TileStyle}>
-                {this.renderResultTiles()}
-            </ScrollView>
+            <View style ={{height: '100%'}}>
+                <Header headerText='Bootcamps'/>
+                    <ScrollView style={TileStyle}>
+
+                        {this.renderResultTiles()}
+                    </ScrollView>
+                <Footer/>
+            </View>
         )
     }
 }

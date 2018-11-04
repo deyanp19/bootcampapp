@@ -4,6 +4,9 @@ import firebase from 'firebase';
 
 import { Section, Input } from '../Common/';
 import RegisterButton from './RegisterButton';
+import Header from '../Header/Header';
+import Footer from '../Footer/Footer';
+
 import { Actions } from 'react-native-router-flux';
 
 class Register extends Component {
@@ -71,74 +74,79 @@ class Register extends Component {
     }
     render(){ 
         return(
-            <View style={styles.containerStyle}>
-                <Section>
-                    <Text style={styles.textStyle}> 
-                        Create An Account
-                    </Text>
+            <View style ={{height: '100%'}}>
+                <Header headerText='Create an Account'/>
 
-                    <TextInput
-                        placeholder="First Name"
-                        value={this.state.first}
-                        onChangeText={first => this.setState({ first })}
-                        style={styles.inputStyle}
+                <View style={styles.containerStyle}>
+                    <Section>
+                        {/* <Text style={styles.textStyle}> 
+                            Create An Account
+                        </Text> */}
 
-                        >
-                    </TextInput>
+                        <TextInput
+                            placeholder="First Name"
+                            value={this.state.first}
+                            onChangeText={first => this.setState({ first })}
+                            style={styles.inputStyle}
 
-                    <TextInput
-                        placeholder="Last Name"
-                        value={this.state.last}
-                        onChangeText={last => this.setState({ last })}
-                        style={styles.inputStyle}
+                            >
+                        </TextInput>
 
-                        >
-                    </TextInput>
+                        <TextInput
+                            placeholder="Last Name"
+                            value={this.state.last}
+                            onChangeText={last => this.setState({ last })}
+                            style={styles.inputStyle}
 
-                    <TextInput
-                        placeholder="Email"
-                        value={this.state.email}
-                        onChangeText={email => this.setState({ email })}
-                        style={styles.inputStyle}
+                            >
+                        </TextInput>
 
-                        >
-                    </TextInput>
+                        <TextInput
+                            placeholder="Email"
+                            value={this.state.email}
+                            onChangeText={email => this.setState({ email })}
+                            style={styles.inputStyle}
 
-                    <TextInput
-                        placeholder="Password"
-                        value={this.state.password}
-                        onChangeText={password => this.setState({ password })}
-                        secureTextEntry
-                        style={styles.inputStyle}
+                            >
+                        </TextInput>
 
-                        >
-                    </TextInput>
+                        <TextInput
+                            placeholder="Password"
+                            value={this.state.password}
+                            onChangeText={password => this.setState({ password })}
+                            secureTextEntry
+                            style={styles.inputStyle}
 
-                    <Text style={styles.errorTextStyle}>
-                        {this.state.error}
-                    </Text>
+                            >
+                        </TextInput>
 
-                    <RegisterButton
-                        onPress={this.onButtonPress.bind(this)}
-                        >
-                        Sign Up
-                    </RegisterButton>
+                        <Text style={styles.errorTextStyle}>
+                            {this.state.error}
+                        </Text>
 
-                </Section>
+                        <RegisterButton
+                            onPress={this.onButtonPress.bind(this)}
+                            >
+                            Sign Up
+                        </RegisterButton>
 
-                <Section>
-                    <Text style={styles.agreementStyle}>
-                        By signing up, you agree with the Terms of Service and Privacy Policy
-                    </Text>
+                    </Section>
 
-                    <RegisterButton
-                        onPress={() => Actions.login()}
-                        >
-                        Already have an account? Click Here!
-                    </RegisterButton>
-                </Section>
-            
+                    <Section>
+                        <Text style={styles.agreementStyle}>
+                            By signing up, you agree with the Terms of Service and Privacy Policy
+                        </Text>
 
+                        <RegisterButton
+                            onPress={() => Actions.login()}
+                            >
+                            Already have an account? Click Here!
+                        </RegisterButton>
+                    </Section>
+                
+
+                </View>
+                <Footer/>
             </View>
 
 

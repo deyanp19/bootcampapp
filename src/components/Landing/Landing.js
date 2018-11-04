@@ -20,7 +20,7 @@ const appre = (<Icon name="university" size={50} color="#FA8D62" />);
 const Landing = () => {
     return(
         <View style={{height: '100%'}}>
-            <Header headerText='Bootcamps'/>
+            <Header headerText='Welcome to Bootcamp Base'/>
             
             <View style={styles.containerStyle}>
                 <Text style={styles.headingStyle}>Find the Right Bootcamp</Text>
