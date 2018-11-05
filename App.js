@@ -1,9 +1,12 @@
 import React, { Component } from 'react';
-import { StyleSheet, Text, View, Image, ScrollView } from 'react-native';
 
 import firebase from 'firebase';
 import { Provider } from 'react-redux';
 import { createStore, applyMiddleware } from 'redux';
+import { Router, Scene } from 'react-native-router-flux';
+
+import ReduxThunk from 'redux-thunk';
+
 import reducers from './src/reducers';
 
 import Register from './src/components/Register/Register';
@@ -11,7 +14,6 @@ import Landing from './src/components/Landing/Landing';
 import Results from './src/components/Results/Results'
 import Login from './src/components/Login/Login';
 
-import { Router, Scene } from 'react-native-router-flux';
 
 
 class App extends Component {
@@ -31,8 +33,10 @@ class App extends Component {
 
   render() {
 
+    const store = createStore(reducers, {}, applyMiddleware(ReduxThunk))
+
     return (
-      <Provider store={createStore(reducers)}>
+      <Provider store={store}>
          <Router sceneStyle={styles.appStyle}>  
           <Scene 
             key="app"

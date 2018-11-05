@@ -1,15 +1,17 @@
 import React, { Component } from 'react';
-import { View, Text, TextInput } from 'react-native';
+import { View, Text, TextInput, Keyboard } from 'react-native';
 // import firebase from 'firebase';
 import { Actions } from 'react-native-router-flux';
 import { connect } from 'react-redux';
-import { emailChanged, passwordChanged } from '../../actions';
+import { emailChanged, passwordChanged, loginUser } from '../../actions';
 
 import Header from '../Header/Header';
 import Footer from '../Footer/Footer';
 
-import { Section } from '../Common/';
+import { Section, Spinner } from '../Common/';
 import RegisterButton from './RegisterButton';
+import LoadingButton from './LoadingButton';
+
 
 class Login extends Component {
 
@@ -20,6 +22,27 @@ class Login extends Component {
     onPasswordChange(text) {
         this.props.passwordChanged(text)
     }
+    
+    onButtonPress() {
+        {Keyboard.dismiss()}
+        const { email, password } = this.props;
+        this.props.loginUser({ email, password});
+    }
+
+    renderError() {
+        if (this.props.error) {
+            return(
+                <Text style={styles.errorTextStyle}>
+                    {this.props.error}
+                </Text>
+            )
+        }
+    }
+
+    renderSpinner() {
+        if (this.props.loading){
+            return (<Spinner size="large"/>)}
+        }
 
     render(){ 
         return(
@@ -51,15 +74,11 @@ class Login extends Component {
                             >
                         </TextInput>
 
-                        <Text style={styles.errorTextStyle}>
-                            {/* {this.state.error} */}
-                        </Text>
 
-                        <RegisterButton
-                            // onPress={this.onButtonPress.bind(this)}
-                            >
-                            Log In
-                        </RegisterButton>
+                    <RegisterButton
+                        onPress={this.onButtonPress.bind(this)}>
+                        Log In
+                    </RegisterButton>
 
                     </Section>
 
@@ -73,8 +92,12 @@ class Login extends Component {
                             >
                             Don't have an account? Click Here!
                         </RegisterButton>
+                        
+                        {this.renderError()}
+
                     </Section>
-                
+
+                    {this.renderSpinner()}
 
                 </View>
                 
@@ -124,8 +147,13 @@ const styles = {
 const mapStateToProps = state => {
     return {
         email: state.auth.email,
-        password: state.auth.password
+        password: state.auth.password,
+        loading: state.auth.loading,
+        error: state.auth.error,
+        user: state.auth.user
     }
 }
 
-export default connect(mapStateToProps, { emailChanged, passwordChanged })(Login);
+export default connect(mapStateToProps, { 
+    emailChanged, passwordChanged, loginUser 
+})(Login);
