@@ -1,91 +1,64 @@
 import React, { Component } from 'react';
-import { View, Text, TextInput } from 'react-native';
-import firebase from 'firebase';
+import { View, Text, TextInput, Keyboard } from 'react-native';
+// import firebase from 'firebase';
 import { Actions } from 'react-native-router-flux';
+import { connect } from 'react-redux';
+import { emailChanged, passwordChanged, loginUser } from '../../actions';
 
 import Header from '../Header/Header';
 import Footer from '../Footer/Footer';
 
-import { Section } from '../Common/';
+import { Section, Spinner } from '../Common/';
 import RegisterButton from './RegisterButton';
+import LoadingButton from './LoadingButton';
+
 
 class Login extends Component {
-    state = {
-        email: "",
-        password: "",
-        error: "",
-        loading: false,
-        loggedIn: null
-    };
 
-    componentWillMount(){
-        // checks if firebase is already running 
-        if(!firebase.apps.length) {
-            firebase.initializeApp({
-                apiKey: "AIzaSyARhVJr40Iz-dIAV5aOtaKD6lLi41ZxQAc",
-                authDomain: "authentication-4be06.firebaseapp.com",
-                databaseURL: "https://authentication-4be06.firebaseio.com",
-                projectId: "authentication-4be06",
-                storageBucket: "authentication-4be06.appspot.com",
-                messagingSenderId: "653745336722"
-              });
+    onEmailChange(text) {
+        this.props.emailChanged(text)
+    }
+
+    onPasswordChange(text) {
+        this.props.passwordChanged(text)
+    }
+    
+    onButtonPress() {
+        {Keyboard.dismiss()}
+        const { email, password } = this.props;
+        this.props.loginUser({ email, password});
+    }
+
+    renderError() {
+        if (this.props.error) {
+            return(
+                <Text style={styles.errorTextStyle}>
+                    {this.props.error}
+                </Text>
+            )
+        }
+    }
+
+    renderSpinner() {
+        if (this.props.loading){
+            return (<Spinner size="large"/>)}
         }
 
-
-          firebase.auth().onAuthStateChanged((user) => {
-            if (user) {
-                this.setState({ loggedIn: true });
-            } else {
-                this.setState({ loggedIn: false });
-            }
-
-          });
-    }
-
-
-    onButtonPress(){
-        const { email, password } = this.state
-        this.setState({ error: "", loading: true });
-
-        firebase.auth().createUserWithEmailAndPassword(email, password)
-        .then(this.onCreateAccountSuccess.bind(this))
-        .catch(this.onCreateAccountFail.bind(this));
-    }
-
-    onCreateAccountFail(){
-        this.setState({ error: 'Login Failed', loading:false })                   
-    }
-
-    onCreateAccountSuccess(){
-        this.setState({ 
-            first: "",
-            last: "",
-            email:"", 
-            password:"", 
-            error: "Account Created", 
-            loading: false
-
-            // redirect to login page
-        });
-
-
-
-    }
     render(){ 
         return(
             <View style ={{height: '100%'}}>
-                <Header headerText='Bootcamps'/>
+                <Header headerText='Bootcamp Base'/>
 
                 <View style={styles.containerStyle}>
                     <Section>
                         <Text style={styles.textStyle}>  
-                            Sign In With Email
+                            Log In With Email
                         </Text>
 
                         <TextInput
                             placeholder="Email"
-                            value={this.state.email}
-                            onChangeText={email => this.setState({ email })}
+                            value={this.props.email}
+                            onChangeText={this.onEmailChange.bind(this)}
                             style={styles.inputStyle}
                             underlineColorAndroid='transparent'
                             >
@@ -93,23 +66,19 @@ class Login extends Component {
 
                         <TextInput
                             placeholder="Password"
-                            value={this.state.password}
-                            onChangeText={password => this.setState({ password })}
+                            value={this.props.password}
+                            onChangeText={this.onPasswordChange.bind(this)}
                             secureTextEntry
                             style={styles.inputStyle}
                             underlineColorAndroid='transparent'
                             >
                         </TextInput>
 
-                        <Text style={styles.errorTextStyle}>
-                            {this.state.error}
-                        </Text>
 
-                        <RegisterButton
-                            onPress={this.onButtonPress.bind(this)}
-                            >
-                            Log In
-                        </RegisterButton>
+                    <RegisterButton
+                        onPress={this.onButtonPress.bind(this)}>
+                        Log In
+                    </RegisterButton>
 
                     </Section>
 
@@ -123,8 +92,12 @@ class Login extends Component {
                             >
                             Don't have an account? Click Here!
                         </RegisterButton>
+                        
+                        {this.renderError()}
+
                     </Section>
-                
+
+                    {this.renderSpinner()}
 
                 </View>
                 
@@ -171,4 +144,16 @@ const styles = {
     }
 }
 
-export default Login;
+const mapStateToProps = state => {
+    return {
+        email: state.auth.email,
+        password: state.auth.password,
+        loading: state.auth.loading,
+        error: state.auth.error,
+        user: state.auth.user
+    }
+}
+
+export default connect(mapStateToProps, { 
+    emailChanged, passwordChanged, loginUser 
+})(Login);
