@@ -6,8 +6,8 @@ import { Actions } from 'react-native-router-flux';
 
 const search = (<Icon name="search" size={25} color="#ffffff" />);
 const profile = (<Icon name="user-circle" size={25} color="#ffffff" />);
-const message = (<Icon name="envelope" size={25} color="#ffffff" />);
-const more = (<Icon name="bookmark" size={25} color="#ffffff" />);
+const heart = (<Icon name="heart" size={25} color="#ffffff" />);
+// const more = (<Icon name="bookmark" size={25} color="#ffffff" />);
 
 
 
@@ -25,29 +25,31 @@ const Footer = (props) => {
                 <Text style={styles.textStyle}>Search</Text>
             </TouchableOpacity>
 
+            <TouchableOpacity>
+                <View style={styles.iconStyle}>
+                    {heart}
+                </View>
+                <Text style={styles.textStyle}>Favorites</Text>
+            </TouchableOpacity>
+
             <TouchableOpacity
                 onPress={() => Actions.login()}>
                 <View style={styles.iconStyle}>
                     {profile}
                 </View>
-                <Text style={styles.textStyle}>Profile</Text>
+                <Text style={styles.textStyle}>Account</Text>
             </TouchableOpacity>
 
-            <TouchableOpacity>
-                <View style={styles.iconStyle}>
-                    {message}
-                </View>
-                <Text style={styles.textStyle}>Messages</Text>
-            </TouchableOpacity>
 
-            <TouchableOpacity
+
+            {/* <TouchableOpacity
                 onPress = {() => Actions.register()}
                 >
                 <View style={styles.iconStyle}>
                     {more}
                 </View>
                 <Text style={styles.textStyle}>More</Text>
-            </TouchableOpacity>
+            </TouchableOpacity> */}
         </View>
 
     );
