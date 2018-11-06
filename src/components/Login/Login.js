@@ -10,7 +10,6 @@ import Footer from '../Footer/Footer';
 
 import { Section, Spinner } from '../Common/';
 import RegisterButton from './RegisterButton';
-import LoadingButton from './LoadingButton';
 
 
 class Login extends Component {
@@ -26,7 +25,7 @@ class Login extends Component {
     onButtonPress() {
         {Keyboard.dismiss()}
         const { email, password } = this.props;
-        this.props.loginUser({ email, password});
+        this.props.loginUser({ email, password})
     }
 
     renderError() {
@@ -97,7 +96,9 @@ class Login extends Component {
 
                     </Section>
 
-                    {this.renderSpinner()}
+                    <View style={styles.sectionStyle}>
+                        {this.renderSpinner()}
+                    </View>
 
                 </View>
                 
@@ -141,6 +142,11 @@ const styles = {
         fontSize: 20,
         alignSelf: 'center',
         color: 'red'
+    },
+    sectionStyle:{
+        marginTop: 20,
+        padding: 10,
+        height: 30,
     }
 }
 

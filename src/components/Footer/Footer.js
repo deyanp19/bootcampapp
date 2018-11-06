@@ -25,7 +25,8 @@ const Footer = (props) => {
                 <Text style={styles.textStyle}>Search</Text>
             </TouchableOpacity>
 
-            <TouchableOpacity>
+            <TouchableOpacity
+                onPress={() => Actions.registerSuccess()}>
                 <View style={styles.iconStyle}>
                     {heart}
                 </View>

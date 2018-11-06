@@ -13,6 +13,8 @@ import Register from './src/components/Register/Register';
 import Landing from './src/components/Landing/Landing';
 import Results from './src/components/Results/Results'
 import Login from './src/components/Login/Login';
+import LoginSuccess from './src/components/Login/LoginSuccess';
+import RegisterSuccess from './src/components/Register/RegisterSuccess';
 
 
 
@@ -57,14 +59,29 @@ class App extends Component {
               title="results"
             />
           
-          < Scene
+            <Scene
               key='login'
               component={Login}
               hideNavBar
               title="login"
             />
 
-          < Scene
+          
+            <Scene
+              key='loginSuccess'
+              component={LoginSuccess}
+              hideNavBar
+              title="loginSuccess"
+            />
+
+            <Scene
+              key='registerSuccess'
+              component={RegisterSuccess}
+              hideNavBar
+              title="registerSuccess"
+            />
+
+            <Scene
               key='register'
               component={Register}
               hideNavBar
