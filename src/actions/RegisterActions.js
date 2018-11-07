@@ -9,6 +9,7 @@ import{
     CREATE_USER,
     CREATE_USER_FAIL,
     CREATE_USER_SUCCESS,
+    REFRESH,
 } from './types'
 
 export const emailCreate = (text) => {
@@ -51,6 +52,12 @@ const createUserFail = (dispatch, error) => {
         type: CREATE_USER_FAIL,
         payload: error
     })
+}
+
+export const refresh = () => {
+    return {
+        type: REFRESH,
+    }
 }
 
 export const createUser = ({ email, password }) => {

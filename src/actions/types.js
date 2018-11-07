@@ -9,3 +9,4 @@ export const LAST_NAME_CHANGED = 'last_name_changed';
 export const CREATE_USER = 'create_user';
 export const CREATE_USER_FAIL = 'create_user_fail';
 export const CREATE_USER_SUCCESS = 'create_user_success';
+export const REFRESH = 'refresh';

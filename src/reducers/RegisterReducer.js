@@ -5,7 +5,8 @@ import {
     LAST_NAME_CHANGED,
     CREATE_USER,
     CREATE_USER_FAIL,
-    CREATE_USER_SUCCESS
+    CREATE_USER_SUCCESS,
+    REFRESH
  } from '../actions/types';
 
 const INITIAL_STATE = {
@@ -65,7 +66,13 @@ const INITIAL_STATE = {
             return {
                 ...state,
                 error: "",
-                loading: true
+                loading: true,
+            }
+
+        case REFRESH:
+            return{
+                ...state,
+                ...INITIAL_STATE
             }
 
         default: 

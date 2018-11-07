@@ -11,13 +11,18 @@ import {
     passwordCreate,
     firstNameChanged, 
     lastNameChanged,
-    createUser
+    createUser,
+    refresh
     
 } from '../../actions';
 import { connect } from 'react-redux';
 import { Actions } from 'react-native-router-flux';
 
 class Register extends Component {
+
+    componentWillMount() {
+        this.props.refresh();
+    }
 
     onFirstChange(text){
         this.props.firstNameChanged(text);
@@ -170,5 +175,5 @@ const mapStateToProps = state => {
 export default connect(mapStateToProps, { 
     emailCreate, passwordCreate, 
     firstNameChanged, lastNameChanged, 
-    createUser
+    createUser, refresh
 })(Register);
