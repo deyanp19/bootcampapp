@@ -1,77 +1,47 @@
 import React, { Component } from 'react';
-import { View, Text, TextInput } from 'react-native';
-import firebase from 'firebase';
+import { View, Text, TextInput, Keyboard } from 'react-native';
 
 import { Section, Input } from '../Common/';
 import RegisterButton from './RegisterButton';
 import Header from '../Header/Header';
 import Footer from '../Footer/Footer';
 
+import { 
+    emailCreate,
+    passwordCreate,
+    firstNameChanged, 
+    lastNameChanged,
+    createUser
+    
+} from '../../actions';
+import { connect } from 'react-redux';
 import { Actions } from 'react-native-router-flux';
 
 class Register extends Component {
-    state = {
-        first: "",
-        last: "",
-        email: "",
-        password: "",
-        error: "",
-        loading: false,
-        loggedIn: null
-    };
 
-    componentWillMount(){
-        if(!firebase.apps.length){
-            firebase.initializeApp({
-                apiKey: "AIzaSyARhVJr40Iz-dIAV5aOtaKD6lLi41ZxQAc",
-                authDomain: "authentication-4be06.firebaseapp.com",
-                databaseURL: "https://authentication-4be06.firebaseio.com",
-                projectId: "authentication-4be06",
-                storageBucket: "authentication-4be06.appspot.com",
-                messagingSenderId: "653745336722"
-              });
-        }
-        
+    onFirstChange(text){
+        this.props.firstNameChanged(text);
+    }
 
-          firebase.auth().onAuthStateChanged((user) => {
-            if (user) {
-                this.setState({ loggedIn: true });
-            } else {
-                this.setState({ loggedIn: false });
-            }
-
-          });
+    onLastChange(text){
+        this.props.lastNameChanged(text);
     }
 
 
-    onButtonPress(){
-        const { email, password } = this.state
-        this.setState({ error: "", loading: true });
-
-        firebase.auth().createUserWithEmailAndPassword(email, password)
-        .then(this.onCreateAccountSuccess.bind(this))
-        .catch(this.onCreateAccountFail.bind(this));
+    onEmailCreate(text) {
+        this.props.emailCreate(text)
     }
 
-    onCreateAccountFail(){
-        this.setState({ error: 'Account Creation Failed', loading:false })                   
+    onPasswordCreate(text) {
+        this.props.passwordCreate(text)
     }
 
-    onCreateAccountSuccess(){
-        this.setState({ 
-            first: "",
-            last: "",
-            email:"", 
-            password:"", 
-            error: "Account Created", 
-            loading: false
-
-            // redirect to login page
-        });
-
-
-
+    onButtonPress() {
+        {Keyboard.dismiss()}
+        const { email, password } = this.props;
+        this.props.createUser({ email, password})
     }
+
     render(){ 
         return(
             <View style ={{height: '100%'}}>
@@ -79,14 +49,10 @@ class Register extends Component {
 
                 <View style={styles.containerStyle}>
                     <Section>
-                        {/* <Text style={styles.textStyle}> 
-                            Create An Account
-                        </Text> */}
-
                         <TextInput
                             placeholder="First Name"
-                            value={this.state.first}
-                            onChangeText={first => this.setState({ first })}
+                            value={this.props.first}
+                            onChangeText={this.onFirstChange.bind(this)}
                             style={styles.inputStyle}
 
                             >
@@ -94,8 +60,8 @@ class Register extends Component {
 
                         <TextInput
                             placeholder="Last Name"
-                            value={this.state.last}
-                            onChangeText={last => this.setState({ last })}
+                            value={this.props.last}
+                            onChangeText={this.onLastChange.bind(this)}
                             style={styles.inputStyle}
 
                             >
@@ -103,8 +69,8 @@ class Register extends Component {
 
                         <TextInput
                             placeholder="Email"
-                            value={this.state.email}
-                            onChangeText={email => this.setState({ email })}
+                            value={this.props.email}
+                            onChangeText={this.onEmailCreate.bind(this)}
                             style={styles.inputStyle}
 
                             >
@@ -112,8 +78,8 @@ class Register extends Component {
 
                         <TextInput
                             placeholder="Password"
-                            value={this.state.password}
-                            onChangeText={password => this.setState({ password })}
+                            value={this.props.password}
+                            onChangeText={this.onPasswordCreate.bind(this)}
                             secureTextEntry
                             style={styles.inputStyle}
 
@@ -121,7 +87,7 @@ class Register extends Component {
                         </TextInput>
 
                         <Text style={styles.errorTextStyle}>
-                            {this.state.error}
+                            {this.props.error}
                         </Text>
 
                         <RegisterButton
@@ -189,4 +155,20 @@ const styles = {
     }
 }
 
-export default Register;
+const mapStateToProps = state => {
+    return {
+        email: state.register.email,
+        password: state.register.password,
+        first: state.register.first,
+        last: state.register.last,
+        loading: state.register.loading,
+        error: state.register.error,
+        user: state.register.user
+    }
+}
+
+export default connect(mapStateToProps, { 
+    emailCreate, passwordCreate, 
+    firstNameChanged, lastNameChanged, 
+    createUser
+})(Register);

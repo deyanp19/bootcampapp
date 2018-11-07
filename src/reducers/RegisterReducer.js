@@ -1,23 +1,38 @@
 import { 
     EMAIL_CHANGED, 
     PASSWORD_CHANGED,
-    LOGIN_USER_SUCCESS,
-    LOGIN_USER_FAIL,
-    LOGIN_USER
+    FIRST_NAME_CHANGED,
+    LAST_NAME_CHANGED,
+    CREATE_USER,
+    CREATE_USER_FAIL,
+    CREATE_USER_SUCCESS
  } from '../actions/types';
 
-const INITIAL_STATE = { 
+const INITIAL_STATE = {
     email: "",
     password: "",
+    first: "",
+    last: "",
     loading: false,
     error: "",
     user: null
-
 }
 
-export default ( state = INITIAL_STATE, action ) => {
-    console.log(action);
-    switch (action.type){
+ export default ( state = INITIAL_STATE, action) => {
+     console.log(state);
+     switch (action.type){
+        case FIRST_NAME_CHANGED: 
+            return { 
+                ...state,
+                first: action.payload    
+            }; 
+
+        case LAST_NAME_CHANGED: 
+            return { 
+                ...state,
+                last: action.payload    
+            }; 
+
         case EMAIL_CHANGED: 
             return { 
                 ...state,
@@ -28,27 +43,25 @@ export default ( state = INITIAL_STATE, action ) => {
             return { 
                 ...state,
                 password: action.payload    
-            };
-            
-        case LOGIN_USER_SUCCESS: 
+            }; 
+
+        case CREATE_USER_SUCCESS: 
             return { 
                 ...state,
                 user : action.payload,
                 error: "" ,
                 loading: false,
-                email: "",
-                password: ""
             };
 
-        case LOGIN_USER_FAIL:
+        case CREATE_USER_FAIL:
             return {
                 ...state,
-                error: "Login Failed",
+                error: "Account Creation Failed",
                 password: "",
                 loading: false
             }
 
-        case LOGIN_USER:
+        case CREATE_USER:
             return {
                 ...state,
                 error: "",
@@ -57,5 +70,5 @@ export default ( state = INITIAL_STATE, action ) => {
 
         default: 
             return state;
-    }
-};
+     }
+ }
