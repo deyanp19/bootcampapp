@@ -1,7 +1,7 @@
 import React, { Component } from 'react';
 import { View, Text, TextInput, Keyboard } from 'react-native';
 
-import { Section, Input } from '../Common/';
+import { Section } from '../Common/';
 import RegisterButton from './RegisterButton';
 import Header from '../Header/Header';
 import Footer from '../Footer/Footer';
@@ -12,7 +12,8 @@ import {
     firstNameChanged, 
     lastNameChanged,
     createUser,
-    refresh
+    refresh,
+    saveUser
     
 } from '../../actions';
 import { connect } from 'react-redux';
@@ -43,8 +44,10 @@ class Register extends Component {
 
     onButtonPress() {
         {Keyboard.dismiss()}
-        const { email, password } = this.props;
-        this.props.createUser({ email, password})
+        const { last, first, email, password } = this.props;
+        this.props.createUser({ first, last, email, password })
+        // this.props.saveUser({ first, last, email, password })
+        
     }
 
     render(){ 
@@ -96,8 +99,7 @@ class Register extends Component {
                         </Text>
 
                         <RegisterButton
-                            onPress={this.onButtonPress.bind(this)}
-                            >
+                            onPress={this.onButtonPress.bind(this)}>
                             Sign Up
                         </RegisterButton>
 
@@ -175,5 +177,6 @@ const mapStateToProps = state => {
 export default connect(mapStateToProps, { 
     emailCreate, passwordCreate, 
     firstNameChanged, lastNameChanged, 
-    createUser, refresh
+    createUser, refresh, 
+    saveUser
 })(Register);

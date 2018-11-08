@@ -2,7 +2,7 @@ import React, { Component } from 'react';
 import { View, Text, TextInput, Keyboard } from 'react-native';
 import { Actions } from 'react-native-router-flux';
 import { connect } from 'react-redux';
-import { emailChanged, passwordChanged, loginUser } from '../../actions';
+import { emailChanged, passwordChanged, loginUser, refresh } from '../../actions';
 
 import Header from '../Header/Header';
 import Footer from '../Footer/Footer';
@@ -12,6 +12,10 @@ import RegisterButton from './RegisterButton';
 
 
 class Login extends Component {
+
+    componentWillMount() {
+        this.props.refresh();
+    }
 
     onEmailChange(text) {
         this.props.emailChanged(text)
@@ -160,5 +164,5 @@ const mapStateToProps = state => {
 }
 
 export default connect(mapStateToProps, { 
-    emailChanged, passwordChanged, loginUser 
+    emailChanged, passwordChanged, loginUser, refresh 
 })(Login);

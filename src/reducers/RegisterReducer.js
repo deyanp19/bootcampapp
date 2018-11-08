@@ -6,7 +6,8 @@ import {
     CREATE_USER,
     CREATE_USER_FAIL,
     CREATE_USER_SUCCESS,
-    REFRESH
+    REFRESH,
+    SAVE_USER
  } from '../actions/types';
 
 const INITIAL_STATE = {
@@ -70,9 +71,14 @@ const INITIAL_STATE = {
             }
 
         case REFRESH:
-            return{
+            return { 
                 ...state,
                 ...INITIAL_STATE
+            }
+
+        case SAVE_USER:
+            return {
+                ...state
             }
 
         default: 

@@ -3,7 +3,8 @@ import {
     PASSWORD_CHANGED,
     LOGIN_USER_SUCCESS,
     LOGIN_USER_FAIL,
-    LOGIN_USER
+    LOGIN_USER,
+    REFRESH
  } from '../actions/types';
 
 const INITIAL_STATE = { 
@@ -50,6 +51,12 @@ export default ( state = INITIAL_STATE, action ) => {
                 ...state,
                 error: "",
                 loading: true
+            }
+
+        case REFRESH:
+            return {
+                ...state,
+                ...INITIAL_STATE
             }
 
         default: 
