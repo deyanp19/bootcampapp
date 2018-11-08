@@ -25,7 +25,7 @@ module.exports = {
     return Comment
     .findAll({
       where: {
-        user_id: req.params.id
+        bootcamp_id: req.params.id
       }
     })
     .then(comment => res.status(201).send(comment))
