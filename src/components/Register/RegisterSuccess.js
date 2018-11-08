@@ -12,7 +12,7 @@ const RegisterSuccess = () => {
             
             <View style={styles.containerStyle}>
                 <Text style={styles.textStyle}>
-                    You have successfully created an account!
+                    Account Created!
                 </Text>
 
                 <Text style={styles.textStyle}>

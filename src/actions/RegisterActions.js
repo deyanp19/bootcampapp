@@ -9,6 +9,8 @@ import{
     CREATE_USER,
     CREATE_USER_FAIL,
     CREATE_USER_SUCCESS,
+    REFRESH,
+    SAVE_USER,
 } from './types'
 
 export const emailCreate = (text) => {
@@ -53,14 +55,35 @@ const createUserFail = (dispatch, error) => {
     })
 }
 
-export const createUser = ({ email, password }) => {
+const saveUser = ({ first, last, email, password }) => {
+    const { currentUser } = firebase.auth();
+
+    if ( first && last && email && password != "") {
+        firebase.database().ref(`/users/${currentUser.uid}/userInfo`)
+        .push({ first, last, email, password })
+    }
+    
+};
+
+export const refresh = () => {
+    return {
+        type: REFRESH,
+    }
+}
+
+export const createUser = ({ first, last, email, password }) => {
+
     return (dispatch) => {
         dispatch({ type: CREATE_USER });
 
         firebase.auth().createUserWithEmailAndPassword(email, password)
             .then(user => createUserSuccess(dispatch, user))
+            // this line saves the user no matter what 
+            .then(saveUser({ first, last, email, password }))
+
             .then(()=>Actions.registerSuccess())
-            .catch(error => createUserFail(dispatch, error));
+            .catch(error => createUserFail(dispatch, error))
+                
     };
 
 };

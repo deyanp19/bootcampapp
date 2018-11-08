@@ -3,7 +3,8 @@ import {
     PASSWORD_CHANGED,
     LOGIN_USER_SUCCESS,
     LOGIN_USER_FAIL,
-    LOGIN_USER
+    LOGIN_USER,
+    REFRESH
  } from '../actions/types';
 
 const INITIAL_STATE = { 
@@ -11,12 +12,12 @@ const INITIAL_STATE = {
     password: "",
     loading: false,
     error: "",
-    user: null
-
+    user: null,
+    isLoggedIn: false
 }
 
 export default ( state = INITIAL_STATE, action ) => {
-    console.log(action);
+    // console.log(action);
     switch (action.type){
         case EMAIL_CHANGED: 
             return { 
@@ -34,10 +35,8 @@ export default ( state = INITIAL_STATE, action ) => {
             return { 
                 ...state,
                 user : action.payload,
-                error: "" ,
-                loading: false,
-                email: "",
-                password: ""
+                isLoggedIn: true
+                
             };
 
         case LOGIN_USER_FAIL:
@@ -53,6 +52,15 @@ export default ( state = INITIAL_STATE, action ) => {
                 ...state,
                 error: "",
                 loading: true
+            }
+
+        case REFRESH:
+            return {
+                ...state,
+                email: "",
+                password: "",
+                loading: false,
+                error: "",
             }
 
         default: 

@@ -1,7 +1,7 @@
 import React, { Component } from 'react';
 import { View, Text, TextInput, Keyboard } from 'react-native';
 
-import { Section, Input } from '../Common/';
+import { Section, Spinner } from '../Common/';
 import RegisterButton from './RegisterButton';
 import Header from '../Header/Header';
 import Footer from '../Footer/Footer';
@@ -11,13 +11,19 @@ import {
     passwordCreate,
     firstNameChanged, 
     lastNameChanged,
-    createUser
+    createUser,
+    refresh,
+    saveUser
     
 } from '../../actions';
 import { connect } from 'react-redux';
 import { Actions } from 'react-native-router-flux';
 
 class Register extends Component {
+
+    componentWillMount() {
+        this.props.refresh();
+    }
 
     onFirstChange(text){
         this.props.firstNameChanged(text);
@@ -38,9 +44,22 @@ class Register extends Component {
 
     onButtonPress() {
         {Keyboard.dismiss()}
-        const { email, password } = this.props;
-        this.props.createUser({ email, password})
+        const { last, first, email, password } = this.props;
+        this.props.createUser({ first, last, email, password })
+        // this.props.saveUser({ first, last, email, password })
+        
     }
+
+    renderSpinner() {
+        if (this.props.loading){
+            return (
+            <View style={{marginTop: '5%'}}>
+                <Spinner size="large"/>)}
+
+            </View>
+            )
+        };
+    };
 
     render(){ 
         return(
@@ -81,20 +100,22 @@ class Register extends Component {
                             value={this.props.password}
                             onChangeText={this.onPasswordCreate.bind(this)}
                             secureTextEntry
-                            style={styles.inputStyle}
-
-                            >
+                            style={styles.inputStyle}>
                         </TextInput>
 
+                        <RegisterButton
+                            onPress={this.onButtonPress.bind(this)}>
+                            Sign Up
+                        </RegisterButton>
+
+                        
+                            {this.renderSpinner()}
                         <Text style={styles.errorTextStyle}>
                             {this.props.error}
                         </Text>
+                    </Section>
 
-                        <RegisterButton
-                            onPress={this.onButtonPress.bind(this)}
-                            >
-                            Sign Up
-                        </RegisterButton>
+                    <Section>
 
                     </Section>
 
@@ -123,7 +144,7 @@ class Register extends Component {
 
 const styles = {
     containerStyle:{
-        marginTop: '5%'
+        marginTop: '10%'
     },
     textStyle:{
         fontSize: 20,
@@ -135,9 +156,10 @@ const styles = {
         fontSize: 12,
         textAlign: 'center',
         fontWeight: '400',
-        marginBottom: '5%',
+        // marginBottom: '5%',
         marginLeft: '10%',
-        marginRight: '10%'
+        marginRight: '10%',
+        marginTop: '35%',
     },
     inputStyle:{
         backgroundColor: '#fff',
@@ -151,7 +173,9 @@ const styles = {
     errorTextStyle:{
         fontSize: 20,
         alignSelf: 'center',
-        color: 'red'
+        color: 'red',
+        position: 'absolute',
+        marginTop: '80%'
     }
 }
 
@@ -170,5 +194,6 @@ const mapStateToProps = state => {
 export default connect(mapStateToProps, { 
     emailCreate, passwordCreate, 
     firstNameChanged, lastNameChanged, 
-    createUser
+    createUser, refresh, 
+    saveUser
 })(Register);

@@ -2,16 +2,21 @@ import React, { Component } from 'react';
 import { View, Text, TextInput, Keyboard } from 'react-native';
 import { Actions } from 'react-native-router-flux';
 import { connect } from 'react-redux';
-import { emailChanged, passwordChanged, loginUser } from '../../actions';
+import { emailChanged, passwordChanged, loginUser, refresh } from '../../actions';
 
 import Header from '../Header/Header';
 import Footer from '../Footer/Footer';
+import Account from '../Account/Account';
 
 import { Section, Spinner } from '../Common/';
 import RegisterButton from './RegisterButton';
 
 
 class Login extends Component {
+
+    componentWillMount() {
+        this.props.refresh();
+    }
 
     onEmailChange(text) {
         this.props.emailChanged(text)
@@ -42,72 +47,83 @@ class Login extends Component {
             return (<Spinner size="large"/>)}
         }
 
+    renderPage() {
+        console.log(this.props.user)
+        if (this.props.isLoggedIn === true) {
+            return (
+            <View>
+                <Account/>
+            </View>
+            )
+        }
+
+        return (
+            <View style={styles.containerStyle}>
+                <Section>
+                    <Text style={styles.textStyle}>  
+                        Log In With Email
+                    </Text>
+
+                    <TextInput
+                        placeholder="Email"
+                        value={this.props.email}
+                        onChangeText={this.onEmailChange.bind(this)}
+                        style={styles.inputStyle}
+                        underlineColorAndroid='transparent'
+                        >
+                    </TextInput>
+
+                    <TextInput
+                        placeholder="Password"
+                        value={this.props.password}
+                        onChangeText={this.onPasswordChange.bind(this)}
+                        secureTextEntry
+                        style={styles.inputStyle}
+                        underlineColorAndroid='transparent'
+                        >
+                    </TextInput>
+
+
+                <RegisterButton
+                    onPress={this.onButtonPress.bind(this)}>
+                    Log In
+                </RegisterButton>
+
+                </Section>
+
+                <Section>
+                    <Text style={styles.agreementStyle}>
+                        Forgot your username or password? 
+                    </Text>
+
+                    <RegisterButton
+                        onPress={() => Actions.register()}
+                        >
+                        Don't have an account? Click Here!
+                    </RegisterButton>
+                    
+                    {this.renderError()}
+
+                </Section>
+
+                <View style={styles.sectionStyle}>
+                    {this.renderSpinner()}
+                </View>
+
+            </View>
+            
+        )
+    }
+
     render(){ 
         return(
             <View style ={{height: '100%'}}>
                 <Header headerText='Bootcamp Base'/>
-
-                <View style={styles.containerStyle}>
-                    <Section>
-                        <Text style={styles.textStyle}>  
-                            Log In With Email
-                        </Text>
-
-                        <TextInput
-                            placeholder="Email"
-                            value={this.props.email}
-                            onChangeText={this.onEmailChange.bind(this)}
-                            style={styles.inputStyle}
-                            underlineColorAndroid='transparent'
-                            >
-                        </TextInput>
-
-                        <TextInput
-                            placeholder="Password"
-                            value={this.props.password}
-                            onChangeText={this.onPasswordChange.bind(this)}
-                            secureTextEntry
-                            style={styles.inputStyle}
-                            underlineColorAndroid='transparent'
-                            >
-                        </TextInput>
-
-
-                    <RegisterButton
-                        onPress={this.onButtonPress.bind(this)}>
-                        Log In
-                    </RegisterButton>
-
-                    </Section>
-
-                    <Section>
-                        <Text style={styles.agreementStyle}>
-                            Forgot your username or password? 
-                        </Text>
-
-                        <RegisterButton
-                            onPress={() => Actions.register()}
-                            >
-                            Don't have an account? Click Here!
-                        </RegisterButton>
-                        
-                        {this.renderError()}
-
-                    </Section>
-
-                    <View style={styles.sectionStyle}>
-                        {this.renderSpinner()}
-                    </View>
-
-                </View>
-                
+                    {this.renderPage()}
                 <Footer/>
             </View>
-
-
         ) 
     }
-
 }
 
 const styles = {
@@ -155,10 +171,11 @@ const mapStateToProps = state => {
         password: state.auth.password,
         loading: state.auth.loading,
         error: state.auth.error,
-        user: state.auth.user
+        user: state.auth.user,
+        isLoggedIn: state.auth.isLoggedIn
     }
 }
 
 export default connect(mapStateToProps, { 
-    emailChanged, passwordChanged, loginUser 
+    emailChanged, passwordChanged, loginUser, refresh 
 })(Login);

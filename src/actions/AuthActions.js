@@ -7,6 +7,7 @@ import {
     LOGIN_USER_SUCCESS, 
     LOGIN_USER_FAIL,
     LOGIN_USER,
+    REFRESH
 } from './types';
 
 
