@@ -15,6 +15,7 @@ import Results from './src/components/Results/Results'
 import Login from './src/components/Login/Login';
 import LoginSuccess from './src/components/Login/LoginSuccess';
 import RegisterSuccess from './src/components/Register/RegisterSuccess';
+import Account from './src/components/Account/Account';
 
 
 
@@ -35,6 +36,8 @@ class App extends Component {
 
 
   render() {
+
+ 
 
     const store = createStore(reducers, {}, applyMiddleware(ReduxThunk))
 
@@ -87,6 +90,13 @@ class App extends Component {
               component={Register}
               hideNavBar
               title="register"
+            />
+
+            <Scene
+              key='account'
+              component={Account}
+              hideNavBar
+              title="account"
             />
           </Scene>
         </Router>

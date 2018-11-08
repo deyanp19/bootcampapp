@@ -26,7 +26,7 @@ const Footer = (props) => {
             </TouchableOpacity>
 
             <TouchableOpacity
-                onPress={() => Actions.registerSuccess()}>
+                onPress={() => Actions.account()}>
                 <View style={styles.iconStyle}>
                     {heart}
                 </View>
