@@ -1,7 +1,7 @@
 import React, { Component } from 'react';
 import { View, Text, TextInput, Keyboard } from 'react-native';
 
-import { Section } from '../Common/';
+import { Section, Spinner } from '../Common/';
 import RegisterButton from './RegisterButton';
 import Header from '../Header/Header';
 import Footer from '../Footer/Footer';
@@ -50,6 +50,17 @@ class Register extends Component {
         
     }
 
+    renderSpinner() {
+        if (this.props.loading){
+            return (
+            <View style={{marginTop: '5%'}}>
+                <Spinner size="large"/>)}
+
+            </View>
+            )
+        };
+    };
+
     render(){ 
         return(
             <View style ={{height: '100%'}}>
@@ -89,19 +100,22 @@ class Register extends Component {
                             value={this.props.password}
                             onChangeText={this.onPasswordCreate.bind(this)}
                             secureTextEntry
-                            style={styles.inputStyle}
-
-                            >
+                            style={styles.inputStyle}>
                         </TextInput>
-
-                        <Text style={styles.errorTextStyle}>
-                            {this.props.error}
-                        </Text>
 
                         <RegisterButton
                             onPress={this.onButtonPress.bind(this)}>
                             Sign Up
                         </RegisterButton>
+
+                        
+                            {this.renderSpinner()}
+                        <Text style={styles.errorTextStyle}>
+                            {this.props.error}
+                        </Text>
+                    </Section>
+
+                    <Section>
 
                     </Section>
 
@@ -130,7 +144,7 @@ class Register extends Component {
 
 const styles = {
     containerStyle:{
-        marginTop: '5%'
+        marginTop: '10%'
     },
     textStyle:{
         fontSize: 20,
@@ -142,9 +156,10 @@ const styles = {
         fontSize: 12,
         textAlign: 'center',
         fontWeight: '400',
-        marginBottom: '5%',
+        // marginBottom: '5%',
         marginLeft: '10%',
-        marginRight: '10%'
+        marginRight: '10%',
+        marginTop: '35%',
     },
     inputStyle:{
         backgroundColor: '#fff',
@@ -158,7 +173,9 @@ const styles = {
     errorTextStyle:{
         fontSize: 20,
         alignSelf: 'center',
-        color: 'red'
+        color: 'red',
+        position: 'absolute',
+        marginTop: '80%'
     }
 }
 

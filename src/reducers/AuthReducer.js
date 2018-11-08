@@ -12,12 +12,12 @@ const INITIAL_STATE = {
     password: "",
     loading: false,
     error: "",
-    user: null
-
+    user: null,
+    isLoggedIn: false
 }
 
 export default ( state = INITIAL_STATE, action ) => {
-    console.log(action);
+    // console.log(action);
     switch (action.type){
         case EMAIL_CHANGED: 
             return { 
@@ -35,7 +35,8 @@ export default ( state = INITIAL_STATE, action ) => {
             return { 
                 ...state,
                 user : action.payload,
-                ... INITIAL_STATE
+                isLoggedIn: true
+                
             };
 
         case LOGIN_USER_FAIL:
@@ -56,7 +57,10 @@ export default ( state = INITIAL_STATE, action ) => {
         case REFRESH:
             return {
                 ...state,
-                ...INITIAL_STATE
+                email: "",
+                password: "",
+                loading: false,
+                error: "",
             }
 
         default: 

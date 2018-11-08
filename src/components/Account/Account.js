@@ -1,14 +1,16 @@
 import React, { Component } from 'react';
-import { View, Text, TextInput, Keyboard } from 'react-native';
+import { View, Text, TextInput, Keyboard, TouchableOpacity } from 'react-native';
 import { Actions } from 'react-native-router-flux';
 import { connect } from 'react-redux';
 import { emailChanged, passwordChanged, loginUser, refresh } from '../../actions';
+import Icon from 'react-native-vector-icons/FontAwesome';
+
 
 import Header from '../Header/Header';
 import Footer from '../Footer/Footer';
+import { Section } from '../Common/';
 
-import { Section, Spinner } from '../Common/';
-
+const edit = (<Icon name ="pencil-square-o" size={45} color="#FA8D62"/> );
 
 class Account extends Component {
     onEmailChange(text) {
@@ -26,13 +28,47 @@ class Account extends Component {
                 <Header headerText='Account Settings'/>
 
                 <View style={styles.containerStyle}>
-                    <Section>
-        
+
+                    <Text style={styles.textStyle}>  
+                        My Profile
+                    </Text>
+
+                    {/* <Section> */}
+                        <View style = {styles.sectionStyle}>
+                            <TextInput
+                                editable={false}
+                                placeholder="First Name"
+                                // value={this.props.first}
+                                // onChangeText={this.onFirstChange.bind(this)}
+                                style={styles.inputStyle}
+                                >
+                            </TextInput>
+
+                            <TouchableOpacity 
+                                style={styles.iconStyle}
+                                // onPress={() => Actions.results()}
+                                >
+                                {edit}
+                            </TouchableOpacity>
+
+                        </View>
+                        
+
+
+                        {/* <TextInput
+                            placeholder="Last Name"
+                            // value={this.props.last}
+                            // onChangeText={this.onLastChange.bind(this)}
+                            style={styles.inputStyle}
+
+                            >
+                        </TextInput>
+
 
                         <TextInput
                             placeholder="Email"
-                            value={this.props.email}
-                            onChangeText={this.onEmailChange.bind(this)}
+                            // value={this.props.email}
+                            // onChangeText={this.onEmailChange.bind(this)}
                             style={styles.inputStyle}
                             underlineColorAndroid='transparent'
                             >
@@ -40,14 +76,14 @@ class Account extends Component {
 
                         <TextInput
                             placeholder="Password"
-                            value={this.props.password}
-                            onChangeText={this.onPasswordChange.bind(this)}
+                            // value={this.props.password}
+                            // onChangeText={this.onPasswordChange.bind(this)}
                             secureTextEntry
                             style={styles.inputStyle}
                             underlineColorAndroid='transparent'
                             >
-                        </TextInput>
-                    </Section>
+                        </TextInput> */}
+                    {/* </Section> */}
                 </View>
                 <Footer/>
             </View>
@@ -66,14 +102,6 @@ const styles = {
         fontWeight: '400',
         marginBottom: '5%'
     },
-    agreementStyle:{
-        fontSize: 12,
-        textAlign: 'center',
-        fontWeight: '400',
-        marginBottom: '5%',
-        marginLeft: '10%',
-        marginRight: '10%'
-    },
     inputStyle:{
         backgroundColor: '#fff',
         padding: 10,
@@ -82,17 +110,24 @@ const styles = {
         marginBottom: 15,
         borderRadius: 5,
         fontSize: 18,
+        flex: 8
     },
-    errorTextStyle:{
-        fontSize: 20,
-        alignSelf: 'center',
-        color: 'red'
+    iconStyle:{
+        // flex: 1,
+        // justifyContent: 'center'
+
     },
     sectionStyle:{
-        marginTop: 20,
-        padding: 10,
-        height: 30,
-    }
+        flexDirection: 'row',
+        // backgroundColor: 'black',
+        justifyContent:'space-evenly',
+        alignItems:'stretch',
+        padding: 5,
+        borderRadius: 5,
+        width: '95%',
+        alignSelf:'center',
+        margin: 10
+    },
 }
 
 const mapStateToProps = state => {
