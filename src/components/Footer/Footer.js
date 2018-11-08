@@ -69,7 +69,7 @@ const styles = {
         minWidth: '100%',
         flexDirection: 'row',
         paddingTop: 10,
-        paddingBottom: 10
+        paddingBottom: 25
     },
     iconStyle:{
         alignSelf:'center'
