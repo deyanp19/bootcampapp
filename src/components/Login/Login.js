@@ -48,7 +48,6 @@ class Login extends Component {
         }
 
     renderPage() {
-        console.log(this.props.user)
         if (this.props.isLoggedIn === true) {
             return (
             <View>

@@ -1,91 +1,91 @@
 import React, { Component } from 'react';
-import { View, Text, TextInput, Keyboard, TouchableOpacity } from 'react-native';
-import { Actions } from 'react-native-router-flux';
-import { connect } from 'react-redux';
-import { emailChanged, passwordChanged, loginUser, refresh } from '../../actions';
+import _ from 'lodash';
+import { View, Text, TextInput, Keyboard, TouchableOpacity, } from 'react-native';
+
 import Icon from 'react-native-vector-icons/FontAwesome';
-
-
 import Header from '../Header/Header';
 import Footer from '../Footer/Footer';
-import { Section } from '../Common/';
 
-const edit = (<Icon name ="pencil-square-o" size={45} color="#FA8D62"/> );
+import { connect } from 'react-redux';
+import { userAccountFetch } from '../../actions';
+
+
+const edit = (<Icon name ="pencil-square-o" size={55} color="#FA8D62"/> );
 
 class Account extends Component {
-    onEmailChange(text) {
-        this.props.emailChanged(text)
+ 
+    fetchData() {
+        this.props.userAccountFetch();
     }
-
-    onPasswordChange(text) {
-        this.props.passwordChanged(text)
-    }
-    
 
     render(){ 
+
+    
+
         return(
             <View style ={{height: '100%'}}>
-                <Header headerText='Account Settings'/>
-
+                {/* <Header headerText='Bootcamp Base'/> */}
                 <View style={styles.containerStyle}>
 
-                    <Text style={styles.textStyle}>  
-                        My Profile
-                    </Text>
+                    <View style = {styles.sectionStyle}>
+                        <Text style={styles.textStyle}>  
+                            Account Setting
+                        </Text>
+                        <TouchableOpacity
+                            onPress={this.fetchData.bind(this)}
+                            style={styles.editButton}
+                            >
+                            {edit}
+                        </TouchableOpacity>
+                    </View>
 
-                    {/* <Section> */}
                         <View style = {styles.sectionStyle}>
                             <TextInput
                                 editable={false}
                                 placeholder="First Name"
-                                // value={this.props.first}
+                                value={this.props.first}
                                 // onChangeText={this.onFirstChange.bind(this)}
                                 style={styles.inputStyle}
                                 >
                             </TextInput>
 
-                            <TouchableOpacity 
-                                style={styles.iconStyle}
-                                // onPress={() => Actions.results()}
-                                >
-                                {edit}
-                            </TouchableOpacity>
-
+                   
                         </View>
-                        
 
+                        <View style = {styles.sectionStyle}>
+                            <TextInput
+                                editable={false}
+                                placeholder="Last Name"
+                                value={this.props.userFirst}
+                                // onChangeText={this.onFirstChange.bind(this)}
+                                style={styles.inputStyle}
+                                >
+                            </TextInput>
+                        </View>
 
-                        {/* <TextInput
-                            placeholder="Last Name"
-                            // value={this.props.last}
-                            // onChangeText={this.onLastChange.bind(this)}
-                            style={styles.inputStyle}
+                        <View style = {styles.sectionStyle}>
+                            <TextInput
+                                editable={false}
+                                placeholder="Email"
+                                value={this.props.userEmail}
+                                style={styles.inputStyle}
+                                >
+                            </TextInput>
+                        </View>
 
-                            >
-                        </TextInput>
-
-
-                        <TextInput
-                            placeholder="Email"
-                            // value={this.props.email}
-                            // onChangeText={this.onEmailChange.bind(this)}
-                            style={styles.inputStyle}
-                            underlineColorAndroid='transparent'
-                            >
-                        </TextInput>
-
-                        <TextInput
-                            placeholder="Password"
-                            // value={this.props.password}
-                            // onChangeText={this.onPasswordChange.bind(this)}
-                            secureTextEntry
-                            style={styles.inputStyle}
-                            underlineColorAndroid='transparent'
-                            >
-                        </TextInput> */}
-                    {/* </Section> */}
-                </View>
-                <Footer/>
+                        <View style = {styles.sectionStyle}>
+                            <TextInput
+                                editable={false}
+                                placeholder="Password"
+                                value={this.props.first}
+                                // onChangeText={this.onFirstChange.bind(this)}
+                                style={styles.inputStyle}
+                                secureTextEntry
+                                >
+                            </TextInput>
+                        </View>                        
+                   </View>
+                {/* <Footer/> */}
             </View>
         ) 
     }
@@ -97,10 +97,10 @@ const styles = {
         marginTop: '5%',
     },
     textStyle:{
-        fontSize: 20,
+        fontSize: 22,
         textAlign: 'center',
         fontWeight: '400',
-        marginBottom: '5%'
+        marginBottom: '5%',
     },
     inputStyle:{
         backgroundColor: '#fff',
@@ -112,34 +112,21 @@ const styles = {
         fontSize: 18,
         flex: 8
     },
-    iconStyle:{
-        // flex: 1,
-        // justifyContent: 'center'
-
-    },
     sectionStyle:{
         flexDirection: 'row',
-        // backgroundColor: 'black',
         justifyContent:'space-evenly',
         alignItems:'stretch',
         padding: 5,
         borderRadius: 5,
         width: '95%',
         alignSelf:'center',
-        margin: 10
     },
-}
-
-const mapStateToProps = state => {
-    return {
-        email: state.auth.email,
-        password: state.auth.password,
-        loading: state.auth.loading,
-        error: state.auth.error,
-        user: state.auth.user
+    editButton:{
+        position: 'absolute',
+        bottom: 5,
+        right: 0,
     }
 }
 
-export default connect(mapStateToProps, { 
-    emailChanged, passwordChanged, loginUser, refresh 
-})(Account);
+
+export default connect(null, { userAccountFetch })(Account);

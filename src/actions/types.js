@@ -10,4 +10,6 @@ export const CREATE_USER = 'create_user';
 export const CREATE_USER_FAIL = 'create_user_fail';
 export const CREATE_USER_SUCCESS = 'create_user_success';
 export const REFRESH = 'refresh';
-export const SAVE_USER = 'save_user'
+export const SAVE_USER = 'save_user';
+
+export const USER_FETCH_SUCCESS = 'user_fetch_success';
