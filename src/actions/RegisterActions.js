@@ -59,7 +59,7 @@ const saveUser = ({ first, last, email, password }) => {
     const { currentUser } = firebase.auth();
 
     if ( first && last && email && password != "") {
-        firebase.database().ref(`/users/${currentUser.uid}/userInfo`)
+        firebase.database().ref(`/users/${currentUser.uid}`)
         .push({ first, last, email, password })
     }
     
@@ -83,7 +83,7 @@ export const createUser = ({ first, last, email, password }) => {
 
             .then(()=>Actions.registerSuccess())
             .catch(error => createUserFail(dispatch, error))
-                
+            
     };
 
 };

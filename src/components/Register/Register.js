@@ -45,9 +45,7 @@ class Register extends Component {
     onButtonPress() {
         {Keyboard.dismiss()}
         const { last, first, email, password } = this.props;
-        this.props.createUser({ first, last, email, password })
-        // this.props.saveUser({ first, last, email, password })
-        
+        this.props.createUser({ first, last, email, password })        
     }
 
     renderSpinner() {
