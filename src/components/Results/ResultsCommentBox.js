@@ -6,7 +6,8 @@ export default class ResultCommentBox extends Component {
         super(props);
 
         this.state = {
-            text: ''
+            text: '',
+            addedCommnet: false
         }
     }
 
